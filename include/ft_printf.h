@@ -2,10 +2,12 @@
 #define FT_PRINTF_H
 
 #include <stdio.h>						// TODO: REMOVE THIS
+#include <string.h>						// TODO: REMOVE THIS
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "../Libft/libft.h"
 
 typedef struct		s_printf
 {
@@ -17,12 +19,15 @@ typedef struct		s_printf
 	size_t width;
 	size_t precision;
 	size_t i;
+	size_t prev_i;
 
 }					t_prt;
 
 int					ft_printf(const char *format, ...);
-void				ft_putstr(char const *s);
-size_t				ft_strlen(const char *s);
-char				*ft_strndup(const char *s1, size_t len);
+
+void				output_int(t_prt *prt);
+
+void add_value_to_str(t_prt *ptr, char *value);
+
 
 #endif //FT_PRINTF_H

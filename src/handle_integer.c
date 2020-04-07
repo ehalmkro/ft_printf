@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strndup.c                                       :+:      :+:    :+:   */
+/*   handle_integer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/06 18:08:47 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/03/06 18:08:47 by ehalmkro         ###   ########.fr       */
+/*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
+/*   Updated: 2020/04/07 17:42:07 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-char	*ft_strndup(const char *s1, size_t len)
+/*static void check_width(t_prt *prt)
 {
-	char	*cpy;
-	int		i;
+	;
+}*/
 
-	i = 0;
-	cpy = (char*)malloc(sizeof(char) * len + 1);
-	if (!cpy)
-		return (NULL);
-	while (s1[i] && len > i)
-	{
-		cpy[i] = s1[i];
-		i++;
-	}
-	cpy[i] = '\0';
-	return (cpy);
+
+void output_int(t_prt *prt)
+{
+	char *ret;
+
+	ret = ft_itoa(va_arg(prt->ap, int));			//TODO: return if error
+	//	check_width(prt);
+	add_value_to_str(prt, ret);
 }
