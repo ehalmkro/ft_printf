@@ -28,10 +28,9 @@ static int	handle_flag(t_prt *prt)
 
 static void parse_format(t_prt *prt)
 {
-	while (prt->format[prt->i])
+	while (prt->format[prt->i++])
 	{
 		prt->format[prt->i] == '%' ? handle_flag(prt) : 0;
-		prt->i++;
 	}
 	copy_format(prt);
 }
@@ -62,6 +61,7 @@ int ft_printf(const char *format, ...)
 
 int main(int argc, char **argv)
 {
-	ft_printf("jou %i esa \n", 245);
+	ft_printf(" jou %i esa G %i %i\n", 1, 2, 3);
+	printf(" jou %i esa G %i \n", 1, 2);
 	return(0);
 }
