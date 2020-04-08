@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/07 19:09:56 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/08 19:54:26 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void add_value_to_str(t_prt *ptr, char *value)
 {
 	char *ret;
+
 	ret = ft_strjoin(ptr->output, value);
 	free(ptr->output);
 	ptr->output = ft_strdup(ret);

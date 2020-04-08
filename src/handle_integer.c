@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/07 17:42:07 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/08 19:52:17 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ void output_int(t_prt *prt)
 
 	ret = ft_itoa(va_arg(prt->ap, int));			//TODO: return if error
 	//	check_width(prt);
+	//printf("ret %s\n", ret);
 	add_value_to_str(prt, ret);
+	free(ret);
 }

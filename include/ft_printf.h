@@ -20,6 +20,7 @@ typedef struct		s_printf
 	size_t precision;
 	size_t i;
 	size_t prev_i;
+	size_t j;
 
 }					t_prt;
 
