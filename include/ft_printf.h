@@ -22,12 +22,13 @@ typedef struct		s_printf
 	va_list ap;
 
 	char specifier;
-	size_t width;
 	size_t precision;
 	size_t i;
 	size_t prev_i;
 	size_t j;
 	e_boolean include_space;
+	char padding_char;
+	size_t width;
 
 
 }					t_prt;

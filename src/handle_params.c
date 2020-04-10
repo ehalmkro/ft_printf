@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/10 14:35:08 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/10 20:06:18 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ int handle_flags(t_prt *prt)
 {
 	char *flags;
 
-	flags = ft_strdup("-+ #0");
+	flags = ft_strdup("-+ #0*");
 	if (ft_strchr(flags, prt->format[++prt->i]) == NULL)
-		return(1);
-	prt->format[prt->i] == ' ' ? prt->include_space = TRUE : 0;
+		return(0);
+	prt->include_space = prt->format[prt->i] == ' ' ? TRUE : FALSE;
 	while (prt->format[prt->i] == ' ')
 		prt->i++;
-
-
+	prt->padding_char = prt->format[prt->i++] == '0' ? '0' : ' ';
+	prt->width = prt->format[prt->i] == '*' ? va_arg(prt->ap, int) + 1 : (size_t)ft_atoi(prt->format + prt->i);
+	while (ft_isdigit(prt->format[prt->i]) || prt->format[prt->i] == '*')
+		prt->i++;
 }
 int	handle_params(t_prt *prt)
 {

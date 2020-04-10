@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/10 14:31:00 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/10 20:06:40 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,15 @@ int main(int argc, char **argv)
 	printf("moro %n \t", &m);
 	printf("%i\n", m);
 	*/
-	printf("\"%    -10i\"\n", 256);
-	printf("\"%           -10i\"\n", 256);
+
+/*	printf("\"%    010i\"\n", 256);
+	printf("\"% 0i\"\n", 256);
+
+ ft_printf("\"%    010i\"\n", 256);
+	ft_printf("\"% 0i\"\n", 256);*/
+
+	printf("%0*i\n", 5, 10);
+	ft_printf("%0*i", 5, 10);
 
 	//printf("moro %n \t", &m);
 	//printf("%i\n", m);
