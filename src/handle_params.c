@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/10 20:06:18 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/10 20:09:47 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ int handle_flags(t_prt *prt)
 	prt->include_space = prt->format[prt->i] == ' ' ? TRUE : FALSE;
 	while (prt->format[prt->i] == ' ')
 		prt->i++;
-	prt->padding_char = prt->format[prt->i++] == '0' ? '0' : ' ';
+	prt->padding_char = prt->format[prt->i] == '0' ? '0' : ' '; //TODO: padding - flag
+	prt->padding_char == '0' ? prt->i++ : 0;
 	prt->width = prt->format[prt->i] == '*' ? va_arg(prt->ap, int) + 1 : (size_t)ft_atoi(prt->format + prt->i);
 	while (ft_isdigit(prt->format[prt->i]) || prt->format[prt->i] == '*')
 		prt->i++;
