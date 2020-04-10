@@ -6,21 +6,13 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/08 19:54:58 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/10 14:31:00 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static void n_format(t_prt *prt)
-{
-	int *arg;
-	int ret;
 
-	ret = (int)ft_strlen(prt->output);
-	arg = va_arg(prt->ap, int*);
-	*arg = ret;
-}
 static int	copy_format(t_prt *prt)
 {
 	char *str;
@@ -35,23 +27,11 @@ static int	copy_format(t_prt *prt)
 	free(str);
 }
 
-static int	handle_flag(t_prt *prt)
-{
-	prt->format[++prt->i] == 'i' ? output_int(prt) : 0;
-	prt->format[prt->i] == '%' ? add_value_to_str(prt, "%") : 0;
-	prt->format[prt->i] == 'n' ? n_format(prt) : 0;
-
-	while (ft_isalpha(prt->format[prt->i]) == 1 && prt->format[prt->i])
-		prt->i++;
-	prt->prev_i = prt->i;
-
-}
-
 static void parse_format(t_prt *prt)
 {
 	while (prt->format[prt->i])
 	{
-		prt->format[prt->i] == '%' ? handle_flag(prt) : prt->i++;
+		prt->format[prt->i] == '%' ? handle_params(prt) : prt->i++;
 		copy_format(prt);
 	}
 }
@@ -64,6 +44,7 @@ static void init(t_prt *printf)
 	printf->width = 0;
 	printf->precision = 0;
 	printf->output = ft_strnew(0);
+	printf->include_space = FALSE;
 }
 int ft_printf(const char *format, ...)
 {
@@ -89,8 +70,14 @@ int main(int argc, char **argv)
 	int n;
 	int m;
 
-//	ft_printf("moro %n \t", &n);
-//	ft_printf("%i\n", n);
+/*	ft_printf("moro %n \t", &n);
+	ft_printf("%i\n", n);
+
+	printf("moro %n \t", &m);
+	printf("%i\n", m);
+	*/
+	printf("\"%    -10i\"\n", 256);
+	printf("\"%           -10i\"\n", 256);
 
 	//printf("moro %n \t", &m);
 	//printf("%i\n", m);

@@ -9,6 +9,12 @@
 #include <stdlib.h>
 #include "../Libft/libft.h"
 
+typedef enum
+{
+	TRUE,
+	FALSE
+}	e_boolean;
+
 typedef struct		s_printf
 {
 	char *format;
@@ -21,6 +27,8 @@ typedef struct		s_printf
 	size_t i;
 	size_t prev_i;
 	size_t j;
+	e_boolean include_space;
+
 
 }					t_prt;
 
@@ -28,7 +36,8 @@ int					ft_printf(const char *format, ...);
 
 void				output_int(t_prt *prt);
 
-void add_value_to_str(t_prt *ptr, char *value);
+void 				add_value_to_str(t_prt *ptr, char *value);
 
+int					handle_params(t_prt *prt);
 
 #endif //FT_PRINTF_H
