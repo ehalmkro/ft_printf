@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/10 20:09:57 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/11 16:33:42 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,29 +70,19 @@ int main(int argc, char **argv)
 	int n;
 	int m;
 
-/*	ft_printf("moro %n \t", &n);
-	ft_printf("%i\n", n);
 
-	printf("moro %n \t", &m);
-	printf("%i\n", m);
-	*/
+	printf("\"%21.20i\"\n", 256);
+	//ft_printf("\"%0.59i\"\n", 256);
 
-/*	printf("\"%    010i\"\n", 256);
-	printf("\"% 0i\"\n", 256);
-
- ft_printf("\"%    010i\"\n", 256);
-	ft_printf("\"% 0i\"\n", 256);*/
-
-	printf("%*i\n", 5, 10);
-	ft_printf("%*i", 5, 10);
+ //ft_printf("\"%9i\"\n", 256);
 
 	//printf("moro %n \t", &m);
 	//printf("%i\n", m);
 //	ft_printf("%i\n", 34);
 	//ft_printf("%i %i", 1, 2);
 	//ft_printf("%% %% %% %i", 4);
-	//ft_printf(" MORO vaan KYL MORO %i %i %i KYL ON \n", 13456, 23456, 3444);
-	//printf(" MORO vaan KYL MORO %i %i %i KYL ON \n", 13456, 23456, 3444);
+//	ft_printf(" MORO vaan KYL MORO %i %i %i KYL ON \n", 13456, 23456, 3444);
+//	printf(" MORO vaan KYL MORO %i %i %i KYL ON \n", 13456, 23456, 3444);
 	//printf(" jou %i esa G %i \n", 1, 2);
 //	while(1);
 	return(0);
