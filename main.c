@@ -7,6 +7,6 @@
 
 int main (int argc, char **argv)
 {
-	printf("100 %i\n", 100);
-	ft_printf("100 %i\n", 100);
+	printf("%x\n", 255);
+//	ft_printf("\"%%\"\n");
 }

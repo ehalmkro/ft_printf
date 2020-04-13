@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/13 15:51:17 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/13 17:34:14 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ static void n_format(t_prt *prt)
 	ret = (int)ft_strlen(prt->output);
 	arg = va_arg(prt->ap, int*);
 	*arg = ret;
+}
+
+static void percent_format(t_prt *prt)
+{
+	char *ret;
+
+	ret = ft_strnew(1);
+	ret[0] = '%';
+	prt->width > 0 ? add_width(prt, ret) : add_value_to_str(prt, ret);
+
 }
 
 static void reinit(t_prt *prt)
@@ -70,7 +80,7 @@ int	handle_params(t_prt *prt)
 	get_precision(prt);
 	if (prt->format[prt->i] == 'i' || prt->format[prt->i] == 'd')
 		output_int(prt);
-	prt->format[prt->i] == '%' ? add_value_to_str(prt, "%") : 0;
+	prt->format[prt->i] == '%' ? percent_format(prt) : 0;
 	prt->format[prt->i++] == 'n' ? n_format(prt) : 0;
 
 	while (ft_isalpha(prt->format[prt->i]) == 1 && prt->format[prt->i])
