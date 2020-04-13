@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/13 15:26:03 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/13 16:04:35 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,30 +72,15 @@ int main(int argc, char **argv)
 
 	m = 100;
 	n = 100;
+	printf("%50.50d\n", 123456789101112);
+	ft_printf("%50.50d\n", 123456789101112);
 
-	printf("%i %d\n", m, n);
-	ft_printf("%i %d\n", m, n);
+	printf("%50d\n", 123456789101112);
+	ft_printf("%50d\n", 123456789101112);
 
-	/*printf("\"%20i\"\n", 256);
-	printf("\"%20.19i\"\n", 256);
-	printf("\"%20.5i\"\n", 256);
-	printf("\"%20.0i\"\n", 256);*/
-//	ft_printf("\"%2.20i\"\n", 256);
-	//ft_printf("\"%20.20i\"\n", 256);
-	//ft_printf("\"%15.20i\"\n", 256);
-	//ft_printf("\"%10.20i\"\n", 256);
-	//ft_printf("\"%5.20i\"\n", 256);
+	printf("%d\n", 123456789101112);
+	ft_printf("%d\n", 123456789101112);
 
- //ft_printf("\"%9i\"\n", 256);
-
-	//printf("moro %n \t", &m);
-	//printf("%i\n", m);
-//	ft_printf("%i\n", 34);
-	//ft_printf("%i %i", 1, 2);
-	//ft_printf("%% %% %% %i", 4);
-//	ft_printf(" MORO vaan KYL MORO %i %i %i KYL ON \n", 13456, 23456, 3444);
-//	printf(" MORO vaan KYL MORO %i %i %i KYL ON \n", 13456, 23456, 3444);
-	//printf(" jou %i esa G %i \n", 1, 2);
-//	while(1);
+	while(1);
 	return(0);
 }

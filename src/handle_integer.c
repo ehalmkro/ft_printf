@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/13 15:16:21 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/13 16:12:31 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void handle_int_width(t_prt *prt, char *ret)
 			padding[i++] = prt->padding_char == '0' ? '0' : ' ';
 		prt->padding_char == '-' ? add_value_to_str(prt, ret) : add_value_to_str(prt, padding);
 		prt->padding_char == '-' ? add_value_to_str(prt, padding) : add_value_to_str(prt, ret);
+		free(padding);
 	}
 }
 
@@ -40,22 +41,35 @@ static char *handle_int_precision(t_prt *prt, char *value)
 
 	i = 0;
 	len = prt->precision - ft_strlen(value);
-	if (len <= 0)
-		return NULL;
-	padding = ft_strnew(len);
+	padding = ft_strnew(len + 1);
+	if (value[0] == '-')
+	{
+		padding[i++] = '-';
+		value++;
+		len++;
+	}
 	while (len-- > 0)
+	{
 		padding[i++] = '0';
+	}
+	padding[i] = '\0';
 	ret = ft_strjoin(padding, value);
+	free(padding);
 	return (ret);
 }
 void output_int(t_prt *prt)
 {
 	char *ret;
+	char *temp;
 
 	ret = ft_itoa(va_arg(prt->ap, int));
 	prt->include_space == TRUE ? add_value_to_str(prt, " ") : 0;
 	if (prt->precision > 0)
-		ret = handle_int_precision(prt, ret);
+	{
+		temp = ret;
+		free (ret);
+		ret = handle_int_precision(prt, temp);
+	}
 	prt->width > 0 ? handle_int_width(prt, ret) : add_value_to_str(prt, ret);;
 	free(ret);
 }
