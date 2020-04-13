@@ -8,7 +8,7 @@ add_library(ft STATIC ${SOURCES} Libft/ft_strndup.c)
 
 
 add_library(ft_printf src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c)
-add_executable(test src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c)
+add_executable(test src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c main.c)
 
 target_link_libraries(ft_printf ft)
 target_link_libraries(test ft)

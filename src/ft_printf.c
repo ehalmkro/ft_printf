@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/13 16:04:35 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/13 16:49:48 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static int	copy_format(t_prt *prt)
 	str[index] = '\0';
 	add_value_to_str(prt, str);
 	free(str);
+	return(0);
 }
 
 static void parse_format(t_prt *prt)
@@ -48,8 +49,8 @@ static void init(t_prt *printf)
 }
 int ft_printf(const char *format, ...)
 {
-	va_list ap;
 	t_prt *prt;
+	int ret;
 
 	prt = (t_prt*)malloc(sizeof(t_prt));
 	if (format)
@@ -60,27 +61,8 @@ int ft_printf(const char *format, ...)
 		parse_format(prt);
 	}
 	ft_putstr(prt->output);
+	ret = ft_strlen(prt->output);
 	free(prt->output);
 	free(prt);
-	return(0);
-}
-
-int main(int argc, char **argv)
-{
-	int n;
-	int m;
-
-	m = 100;
-	n = 100;
-	printf("%50.50d\n", 123456789101112);
-	ft_printf("%50.50d\n", 123456789101112);
-
-	printf("%50d\n", 123456789101112);
-	ft_printf("%50d\n", 123456789101112);
-
-	printf("%d\n", 123456789101112);
-	ft_printf("%d\n", 123456789101112);
-
-	while(1);
-	return(0);
+	return(ret);
 }
