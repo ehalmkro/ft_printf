@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/11 16:20:54 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/13 15:25:10 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ static void reinit(t_prt *prt)
 	prt->padding_char = ' ';
 }
 
-int handle_precision(t_prt *prt)
+int get_precision(t_prt *prt)
 {
-	if (prt->format[prt->i++] != '.')
+	if (prt->format[prt->i + 1] != '.')
 		return(0);
+	prt->i++;
 	prt->precision = prt->format[prt->i] == '*' ? (size_t)va_arg(prt->ap, int)
 			: (size_t)ft_atoi(prt->format + prt->i);
 	while (ft_isdigit(prt->format[prt->i]) || prt->format[prt->i] == '*')
@@ -41,14 +42,17 @@ int handle_precision(t_prt *prt)
 	return(0);
 }
 
-int handle_width(t_prt *prt) // TODO: add error handling
+int get_width(t_prt *prt) // TODO: add error handling
 {
 	char *flags;
 
 	flags = ft_strdup("-+ #0*");
 	if (ft_strchr(flags, prt->format[++prt->i]) == NULL &&
 		ft_isdigit(prt->format[prt->i]) == 0)
+	{
+		free(flags);
 		return (0);
+	}
 	prt->include_space = prt->format[prt->i] == ' ' ? TRUE : FALSE;
 	while (prt->format[prt->i] == ' ')
 		prt->i++;
@@ -57,12 +61,13 @@ int handle_width(t_prt *prt) // TODO: add error handling
 	prt->width = prt->format[prt->i] == '*' ? (size_t)va_arg(prt->ap, int) + 1 : (size_t)ft_atoi(prt->format + prt->i);
 	while (ft_isdigit(prt->format[prt->i]) || prt->format[prt->i] == '*')
 		prt->i++;
+	free(flags);
 	return(0);
 }
 int	handle_params(t_prt *prt)
 {
-	handle_width(prt);
-	handle_precision(prt);
+	get_width(prt);
+	get_precision(prt);
 	if (prt->format[prt->i] == 'i' || prt->format[prt->i] == 'd')
 		output_int(prt);
 	prt->format[prt->i] == '%' ? add_value_to_str(prt, "%") : 0;

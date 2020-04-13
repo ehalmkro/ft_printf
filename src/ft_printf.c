@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/11 16:33:42 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/13 15:26:03 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,21 @@ int main(int argc, char **argv)
 	int n;
 	int m;
 
+	m = 100;
+	n = 100;
 
-	printf("\"%21.20i\"\n", 256);
-	//ft_printf("\"%0.59i\"\n", 256);
+	printf("%i %d\n", m, n);
+	ft_printf("%i %d\n", m, n);
+
+	/*printf("\"%20i\"\n", 256);
+	printf("\"%20.19i\"\n", 256);
+	printf("\"%20.5i\"\n", 256);
+	printf("\"%20.0i\"\n", 256);*/
+//	ft_printf("\"%2.20i\"\n", 256);
+	//ft_printf("\"%20.20i\"\n", 256);
+	//ft_printf("\"%15.20i\"\n", 256);
+	//ft_printf("\"%10.20i\"\n", 256);
+	//ft_printf("\"%5.20i\"\n", 256);
 
  //ft_printf("\"%9i\"\n", 256);
 
