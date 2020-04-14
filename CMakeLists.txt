@@ -4,11 +4,11 @@ project(ft_printf C)
 set(CMAKE_C_STANDARD 99)
 
 file(GLOB SOURCES "Libft/*.c")
-add_library(ft STATIC ${SOURCES} Libft/ft_strndup.c)
+add_library(ft STATIC ${SOURCES} Libft/ft_strndup.c Libft/ft_itoa_base.c)
 
 
-add_library(ft_printf src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c)
-add_executable(test src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c main.c)
+add_library(ft_printf src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c src/handle_hex.c)
+add_executable(test src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c main.c src/handle_hex.c)
 
 target_link_libraries(ft_printf ft)
 target_link_libraries(test ft)

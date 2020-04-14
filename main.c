@@ -7,6 +7,8 @@
 
 int main (int argc, char **argv)
 {
-	printf("%x\n", 255);
-//	ft_printf("\"%%\"\n");
+	printf("%#10X\n", 255);
+	ft_printf("%#10X\n", 255);
+
+	return(0);
 }

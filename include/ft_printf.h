@@ -21,12 +21,12 @@ typedef struct		s_printf
 	char *output;
 	va_list ap;
 
-	char specifier;
 	size_t precision;
 	size_t i;
 	size_t prev_i;
 	size_t j;
 	e_boolean include_space;
+	e_boolean include_hash;
 	char padding_char;
 	size_t width;
 
@@ -36,6 +36,7 @@ typedef struct		s_printf
 int					ft_printf(const char *format, ...);
 
 void				output_int(t_prt *prt);
+void 				output_hex(t_prt *prt);
 
 void 				add_value_to_str(t_prt *ptr, char *value);
 
