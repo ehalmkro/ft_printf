@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/13 17:29:39 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/15 16:43:22 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void add_width(t_prt *prt, char *ret)
 {
-	size_t i;
-	size_t padding_count;
+	int i;
+	int padding_count;
 	char *padding;
 
 

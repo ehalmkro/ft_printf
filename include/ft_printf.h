@@ -15,6 +15,19 @@ typedef enum
 	FALSE
 }	e_boolean;
 
+typedef enum
+{
+	undef,
+	hh,
+	h,
+	ll,
+	l,
+	j,
+	z,
+	t,
+	L
+}	e_length;
+
 typedef struct		s_printf
 {
 	char *format;
@@ -29,8 +42,7 @@ typedef struct		s_printf
 	e_boolean include_hash;
 	char padding_char;
 	size_t width;
-
-
+	e_length length;
 }					t_prt;
 
 int					ft_printf(const char *format, ...);
@@ -43,5 +55,7 @@ void 				add_value_to_str(t_prt *ptr, char *value);
 int					handle_params(t_prt *prt);
 
 void 				add_width(t_prt *prt, char *ret);
+
+char 				*integer_length(t_prt *prt, int base);
 
 #endif //FT_PRINTF_H
