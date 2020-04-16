@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/16 15:22:34 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/16 16:25:48 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,12 @@ int	handle_params(t_prt *prt)
 	get_width(prt);
 	get_precision(prt);
 	get_length(prt);
-	printf("width %zu, padded with  \"%c\" hash %i\n prec %zu\n", prt->width, prt->padding_char, prt->include_hash, prt->precision);
+//	printf("width %zu, padded with  \"%c\" hash %i\n prec %zu\n", prt->width, prt->padding_char, prt->include_hash, prt->precision);
 	(prt->format[prt->i] == 'i' || prt->format[prt->i] == 'd') ? output_int(prt): 0;
 	prt->format[prt->i] == '%' ? percent_format(prt) : 0;
 	(prt->format[prt->i] == 'x' || prt->format[prt->i] == 'X' ) ? output_hex(prt) : 0;
 	prt->format[prt->i] == 's' ? output_string(prt): 0;
+	prt->format[prt->i] == 'c' ? output_char(prt): 0;
 	prt->format[prt->i++] == 'n' ? n_format(prt) : 0;
 	while (ft_isalpha(prt->format[prt->i]) == 1 && prt->format[prt->i])
 		prt->i++;

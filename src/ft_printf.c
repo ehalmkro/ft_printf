@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/16 14:43:21 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/16 16:36:54 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ int ft_printf(const char *format, ...)
 	ret = ft_strlen(prt->output);
 	free(prt->output);
 	free(prt);
-	while(1);
+//	while(1);
 	return(ret);
 }
