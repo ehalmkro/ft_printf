@@ -7,8 +7,8 @@ file(GLOB SOURCES "Libft/*.c")
 add_library(ft STATIC ${SOURCES} Libft/ft_strndup.c Libft/ft_itoa_base.c)
 
 
-add_library(ft_printf src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c src/handle_hex.c)
-add_executable(test src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c main.c src/handle_hex.c)
+add_library(ft_printf src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c src/handle_hex.c src/handle_string.c)
+add_executable(test src/ft_printf.c src/handle_integer.c Libft/libft.h src/output.c src/handle_params.c main.c src/handle_hex.c src/handle_string.c)
 
 target_link_libraries(ft_printf ft)
 target_link_libraries(test ft)

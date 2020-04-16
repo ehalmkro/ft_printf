@@ -8,8 +8,11 @@
 int main (int argc, char **argv)
 {
 
-	ft_printf("%09x\n", 42);
-	printf("%0#9x", 42);
+//	ft_printf("oma \t \"%#4x\"\n", 4442);
+//	printf("kaupan \t \"%#4x \"\n", 4442);
+
+	ft_printf("%.2s is a string\n", "this");
+	printf("%.2s is a string\n", "this");
 	//ft_printf("%llX\n", 4294967296);
 //	ft_printf("%lX\n", 4294967296);
 //	ft_printf("%jX", 4294967296);

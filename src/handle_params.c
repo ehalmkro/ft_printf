@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/15 16:40:04 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/16 15:22:34 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,13 +91,15 @@ int get_width(t_prt *prt) // TODO: add error handling
 	prt->include_space = prt->format[prt->i] == ' ' ? TRUE : FALSE;
 	while (prt->format[prt->i] == ' ')
 		prt->i++;
+
+	prt->padding_char = (prt->format[prt->i] == '0' || prt->format[prt->i] == '-')
+			? prt->format[prt->i++] : ' ';
+
 	if (prt->format[prt->i] == '#')
 	{
 		prt->include_hash = TRUE;
 		prt->i++;
 	}
-	prt->padding_char = (prt->format[prt->i] == '0' || prt->format[prt->i] == '-')
-			? prt->format[prt->i++] : ' ';
 	prt->width = prt->format[prt->i] == '*' ? (size_t)va_arg(prt->ap, int) + 1 :
 			ft_atoi(prt->format + prt->i);
 	while (ft_isdigit(prt->format[prt->i]) || prt->format[prt->i] == '*')
@@ -110,9 +112,11 @@ int	handle_params(t_prt *prt)
 	get_width(prt);
 	get_precision(prt);
 	get_length(prt);
+	printf("width %zu, padded with  \"%c\" hash %i\n prec %zu\n", prt->width, prt->padding_char, prt->include_hash, prt->precision);
 	(prt->format[prt->i] == 'i' || prt->format[prt->i] == 'd') ? output_int(prt): 0;
 	prt->format[prt->i] == '%' ? percent_format(prt) : 0;
 	(prt->format[prt->i] == 'x' || prt->format[prt->i] == 'X' ) ? output_hex(prt) : 0;
+	prt->format[prt->i] == 's' ? output_string(prt): 0;
 	prt->format[prt->i++] == 'n' ? n_format(prt) : 0;
 	while (ft_isalpha(prt->format[prt->i]) == 1 && prt->format[prt->i])
 		prt->i++;

@@ -11,8 +11,8 @@
 
 typedef enum
 {
-	TRUE,
-	FALSE
+	FALSE,
+	TRUE
 }	e_boolean;
 
 typedef enum
@@ -49,6 +49,7 @@ int					ft_printf(const char *format, ...);
 
 void				output_int(t_prt *prt);
 void 				output_hex(t_prt *prt);
+void 				output_string(t_prt *prt);
 
 void 				add_value_to_str(t_prt *ptr, char *value);
 
