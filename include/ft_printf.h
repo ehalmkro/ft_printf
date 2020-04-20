@@ -51,6 +51,7 @@ void				output_int(t_prt *prt);
 void 				output_hex(t_prt *prt);
 void 				output_string(t_prt *prt);
 void				output_char(t_prt *prt);
+void				output_float(t_prt *prt);
 
 void 				add_value_to_str(t_prt *ptr, char *value);
 

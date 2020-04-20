@@ -118,6 +118,7 @@ int	handle_params(t_prt *prt)
 	(prt->format[prt->i] == 'x' || prt->format[prt->i] == 'X' ) ? output_hex(prt) : 0;
 	prt->format[prt->i] == 's' ? output_string(prt): 0;
 	prt->format[prt->i] == 'c' ? output_char(prt): 0;
+	prt->format[prt->i] == 'f' ? output_float(prt) : 0;
 	prt->format[prt->i++] == 'n' ? n_format(prt) : 0;
 	while (ft_isalpha(prt->format[prt->i]) == 1 && prt->format[prt->i])
 		prt->i++;
