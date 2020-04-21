@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/16 16:25:48 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/20 15:20:40 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void reinit(t_prt *prt)
 	prt->include_hash = FALSE;
 	prt->length = undef;
 	prt->padding_char = ' ';
+	prt->base = 10;
 }
 
 int get_precision(t_prt *prt)
@@ -91,10 +92,8 @@ int get_width(t_prt *prt) // TODO: add error handling
 	prt->include_space = prt->format[prt->i] == ' ' ? TRUE : FALSE;
 	while (prt->format[prt->i] == ' ')
 		prt->i++;
-
 	prt->padding_char = (prt->format[prt->i] == '0' || prt->format[prt->i] == '-')
 			? prt->format[prt->i++] : ' ';
-
 	if (prt->format[prt->i] == '#')
 	{
 		prt->include_hash = TRUE;
@@ -113,7 +112,7 @@ int	handle_params(t_prt *prt)
 	get_precision(prt);
 	get_length(prt);
 //	printf("width %zu, padded with  \"%c\" hash %i\n prec %zu\n", prt->width, prt->padding_char, prt->include_hash, prt->precision);
-	(prt->format[prt->i] == 'i' || prt->format[prt->i] == 'd') ? output_int(prt): 0;
+	(prt->format[prt->i] == 'i' || prt->format[prt->i] == 'd' || prt->format[prt->i] == 'o' || prt->format[prt->i] == 'u') ? output_int(prt): 0;
 	prt->format[prt->i] == '%' ? percent_format(prt) : 0;
 	(prt->format[prt->i] == 'x' || prt->format[prt->i] == 'X' ) ? output_hex(prt) : 0;
 	prt->format[prt->i] == 's' ? output_string(prt): 0;

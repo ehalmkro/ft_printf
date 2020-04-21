@@ -38,6 +38,7 @@ typedef struct		s_printf
 	size_t i;
 	size_t prev_i;
 	size_t j;
+	size_t base;
 	e_boolean include_space;
 	e_boolean include_hash;
 	char padding_char;
@@ -59,6 +60,6 @@ int					handle_params(t_prt *prt);
 
 void 				add_width(t_prt *prt, char *ret);
 
-char 				*integer_length(t_prt *prt, int base);
+char 				*integer_length(t_prt *prt);
 
 #endif //FT_PRINTF_H

@@ -21,7 +21,8 @@ int main (int argc, char **argv)
 //	ft_printf("%zX\n", 4294967296);
 //	ft_printf("%tX\n", 4294967296);
 	//ft_printf(";%c;\n", 0);
-	//printf(";%c;\n", 0);
+//	printf("%d %d\n", 2500, -2);
+	ft_printf("%d\n", -2);
 
 	return(0);
 }

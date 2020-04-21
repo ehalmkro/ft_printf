@@ -36,7 +36,8 @@ void output_hex(t_prt *prt)
 	int padding;
 	char *temp;
 
-	ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int), 16) : integer_length(prt, 16);
+	prt->base = 16;
+	ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int), prt->base) : integer_length(prt);
 	padding = prt->width - ft_strlen(ret);
 	if (prt->include_hash == TRUE && ft_atoi(ret) != 0 && padding <= 0 )
 	{

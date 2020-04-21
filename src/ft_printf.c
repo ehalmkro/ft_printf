@@ -48,6 +48,7 @@ static void init(t_prt *printf)
 	printf->include_space = FALSE;
 	printf->include_hash = FALSE;
 	printf->length = undef;
+	printf->base = 10;
 }
 int ft_printf(const char *format, ...)
 {
