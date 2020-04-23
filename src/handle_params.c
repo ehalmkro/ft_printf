@@ -6,13 +6,29 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/20 15:20:40 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/23 16:04:46 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static void n_format(t_prt *prt)
+t_convert g_convert_tab[] =
+		{
+				{'c', &output_char},
+				{'i', &output_int},
+				{'d', &output_int},
+				{'o', &output_int},
+				{'u', &output_int},
+				{'%', &percent_format},
+				{'s', &output_string},
+				{'f', &output_float},
+				{'x', &output_hex},
+				{'X', &output_hex},
+				{'n', &n_format},
+				{'\0', NULL}
+		};
+
+void n_format(t_prt *prt)
 {
 	int *arg;
 	int ret;
@@ -22,7 +38,7 @@ static void n_format(t_prt *prt)
 	*arg = ret;
 }
 
-static void percent_format(t_prt *prt)
+void percent_format(t_prt *prt)
 {
 	char *ret;
 
@@ -106,19 +122,21 @@ int get_width(t_prt *prt) // TODO: add error handling
 	free(flags);
 	return(0);
 }
+
 int	handle_params(t_prt *prt)
 {
+	int i;
+
+	i = 0;
 	get_width(prt);
 	get_precision(prt);
 	get_length(prt);
-//	printf("width %zu, padded with  \"%c\" hash %i\n prec %zu\n", prt->width, prt->padding_char, prt->include_hash, prt->precision);
-	(prt->format[prt->i] == 'i' || prt->format[prt->i] == 'd' || prt->format[prt->i] == 'o' || prt->format[prt->i] == 'u') ? output_int(prt): 0;
-	prt->format[prt->i] == '%' ? percent_format(prt) : 0;
-	(prt->format[prt->i] == 'x' || prt->format[prt->i] == 'X' ) ? output_hex(prt) : 0;
-	prt->format[prt->i] == 's' ? output_string(prt): 0;
-	prt->format[prt->i] == 'c' ? output_char(prt): 0;
-	prt->format[prt->i] == 'f' ? output_float(prt) : 0;
-	prt->format[prt->i++] == 'n' ? n_format(prt) : 0;
+	while (g_convert_tab[i].specifier != '\0')
+	{
+		if (prt->format[prt->i] == g_convert_tab[i].specifier)
+			g_convert_tab[i].f(prt);
+		i++;
+	}
 	while (ft_isalpha(prt->format[prt->i]) == 1 && prt->format[prt->i])
 		prt->i++;
 	prt->prev_i = prt->i;

@@ -46,6 +46,13 @@ typedef struct		s_printf
 	e_length length;
 }					t_prt;
 
+typedef struct  s_convert
+{
+	const char  specifier;
+	void        (*f)(t_prt *prt);
+}               t_convert;
+
+
 int					ft_printf(const char *format, ...);
 
 void				output_int(t_prt *prt);
@@ -53,6 +60,11 @@ void 				output_hex(t_prt *prt);
 void 				output_string(t_prt *prt);
 void				output_char(t_prt *prt);
 void				output_float(t_prt *prt);
+void				n_format(t_prt *prt);
+void 				percent_format(t_prt *prt);
+
+
+
 
 void 				add_value_to_str(t_prt *ptr, char *value);
 
