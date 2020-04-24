@@ -1,6 +1,7 @@
 #ifndef FT_PRINTF_H
 #define FT_PRINTF_H
 
+#define CURR_POS prt->format[prt->i]
 #include <stdio.h>						// TODO: REMOVE THIS
 #include <string.h>						// TODO: REMOVE THIS
 #include <stdarg.h>
@@ -49,28 +50,27 @@ typedef struct		s_printf
 typedef struct  s_convert
 {
 	const char  specifier;
-	void        (*f)(t_prt *prt);
+	char*        (*f)(t_prt *prt);
 }               t_convert;
 
 
 int					ft_printf(const char *format, ...);
 
-void				output_int(t_prt *prt);
-void 				output_hex(t_prt *prt);
-void 				output_string(t_prt *prt);
-void				output_char(t_prt *prt);
-void				output_float(t_prt *prt);
-void				n_format(t_prt *prt);
-void 				percent_format(t_prt *prt);
+char *				output_int(t_prt *prt);
+char * 				output_hex(t_prt *prt);
+char * 				output_string(t_prt *prt);
+char *				output_char(t_prt *prt);
+char *				output_float(t_prt *prt);
+char *				n_format(t_prt *prt);
+char * 				percent_format(t_prt *prt);
 
-
-
+char *str_toupper(char *str); // TODO: ADD THIS TO LIB
 
 void 				add_value_to_str(t_prt *ptr, char *value);
 
-int					handle_params(t_prt *prt);
+void handle_params(t_prt *prt);
 
-void 				add_width(t_prt *prt, char *ret);
+char* 				add_width(t_prt *prt, char *ret);
 
 char 				*integer_length(t_prt *prt);
 

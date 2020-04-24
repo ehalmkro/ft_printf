@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/23 16:04:46 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/24 15:52:07 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_convert g_convert_tab[] =
 				{'\0', NULL}
 		};
 
-void n_format(t_prt *prt)
+char *n_format(t_prt *prt)
 {
 	int *arg;
 	int ret;
@@ -36,15 +36,17 @@ void n_format(t_prt *prt)
 	ret = (int)ft_strlen(prt->output);
 	arg = va_arg(prt->ap, int*);
 	*arg = ret;
+	return("");
 }
 
-void percent_format(t_prt *prt)
+char *percent_format(t_prt *prt)
 {
 	char *ret;
 
 	ret = ft_strnew(1);
 	ret[0] = '%';
-	prt->width > 0 ? add_width(prt, ret) : add_value_to_str(prt, ret);
+	ret = prt->width > 0 ? add_width(prt, ret) : ret;
+	return(ret);
 
 }
 
@@ -53,20 +55,20 @@ static void get_length(t_prt *prt)
 	char *flags;
 
 	flags = ft_strdup("hljztL");
-	if (ft_strchr(flags, prt->format[prt->i]) == NULL)
+	if (ft_strchr(flags, CURR_POS) == NULL)
 	{
 		free(flags);
 		return ;
 	}
-	if (prt->format[prt->i] == 'h')
+	if (CURR_POS == 'h')
 		prt->length = prt->format[prt->i + 1] == 'h' ? hh : h;
-	if (prt->format[prt->i] == 'l')
+	if (CURR_POS == 'l')
 		prt->length = prt->format[prt->i + 1] == 'l' ? ll : l;
-	prt->format[prt->i] == 'j' ? prt->length = j : 0;
-	prt->format[prt->i] == 'z' ? prt->length = z : 0;
-	prt->format[prt->i] == 't' ? prt->length = t : 0;
-	prt->format[prt->i] == 'L' ? prt->length = L : 0;
-	while (ft_strchr(flags, prt->format[prt->i]) != NULL && prt->format[prt->i])
+	CURR_POS == 'j' ? prt->length = j : 0;
+	CURR_POS == 'z' ? prt->length = z : 0;
+	CURR_POS == 't' ? prt->length = t : 0;
+	CURR_POS == 'L' ? prt->length = L : 0;
+	while (ft_strchr(flags, CURR_POS) != NULL && CURR_POS)
 		prt->i++;
 
 }
@@ -84,12 +86,12 @@ static void reinit(t_prt *prt)
 
 int get_precision(t_prt *prt)
 {
-	if (prt->format[prt->i] != '.')
+	if (CURR_POS != '.')
 		return(0);
 	prt->i++;
-	prt->precision = prt->format[prt->i] == '*' ? (size_t)va_arg(prt->ap, int)
+	prt->precision = CURR_POS == '*' ? (size_t)va_arg(prt->ap, int)
 			: (size_t)ft_atoi(prt->format + prt->i);
-	while (ft_isdigit(prt->format[prt->i]) || prt->format[prt->i] == '*')
+	while (ft_isdigit(CURR_POS) || CURR_POS == '*')
 		prt->i++;
 	return(0);
 }
@@ -100,32 +102,33 @@ int get_width(t_prt *prt) // TODO: add error handling
 
 	flags = ft_strdup("-+ #0*");
 	if (ft_strchr(flags, prt->format[++prt->i]) == NULL &&
-		ft_isdigit(prt->format[prt->i]) == 0)
+		ft_isdigit(CURR_POS) == 0)
 	{
 		free(flags);
 		return (0);
 	}
-	prt->include_space = prt->format[prt->i] == ' ' ? TRUE : FALSE;
-	while (prt->format[prt->i] == ' ')
+	prt->include_space = CURR_POS == ' ' ? TRUE : FALSE;
+	while (CURR_POS == ' ')
 		prt->i++;
-	prt->padding_char = (prt->format[prt->i] == '0' || prt->format[prt->i] == '-')
-			? prt->format[prt->i++] : ' ';
-	if (prt->format[prt->i] == '#')
+	if (CURR_POS == '#')
 	{
 		prt->include_hash = TRUE;
 		prt->i++;
 	}
-	prt->width = prt->format[prt->i] == '*' ? (size_t)va_arg(prt->ap, int) + 1 :
+	prt->padding_char = (CURR_POS == '0' || CURR_POS == '-')
+			? prt->format[prt->i++] : ' ';
+	prt->width = CURR_POS == '*' ? (size_t)va_arg(prt->ap, int) + 1 :
 			ft_atoi(prt->format + prt->i);
-	while (ft_isdigit(prt->format[prt->i]) || prt->format[prt->i] == '*')
+	while (ft_isdigit(CURR_POS) || CURR_POS == '*')
 		prt->i++;
 	free(flags);
 	return(0);
 }
 
-int	handle_params(t_prt *prt)
+void handle_params(t_prt *prt)
 {
 	int i;
+	char *ret;
 
 	i = 0;
 	get_width(prt);
@@ -133,13 +136,18 @@ int	handle_params(t_prt *prt)
 	get_length(prt);
 	while (g_convert_tab[i].specifier != '\0')
 	{
-		if (prt->format[prt->i] == g_convert_tab[i].specifier)
-			g_convert_tab[i].f(prt);
+		if (CURR_POS == g_convert_tab[i].specifier)
+		{
+			//printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nSPECIFIER \t\t %c\n",\
+		 // prt->padding_char, prt->width, prt->precision, prt->include_hash, prt->include_space, CURR_POS);
+			ret = g_convert_tab[i].f(prt);
+			add_value_to_str(prt, ret);
+		}
 		i++;
 	}
-	while (ft_isalpha(prt->format[prt->i]) == 1 && prt->format[prt->i])
+	prt->i++;
+	while (ft_isalpha(CURR_POS) == 1 && CURR_POS)
 		prt->i++;
 	prt->prev_i = prt->i;
 	reinit(prt);
-	return(1);
 }

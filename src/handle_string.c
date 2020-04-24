@@ -12,17 +12,14 @@
 
 #include "../include/ft_printf.h"
 
-void output_string(t_prt *prt)
+char *output_string(t_prt *prt)
 {
 	char *ret;
 
 	ret = ft_strdup(va_arg(prt->ap, char*));
 	if (ret == NULL)
-	{
-		add_value_to_str(prt, "(null)");
-		return;
-	}
+		return("null");
 	ret = prt->precision > 0 ? ft_strndup(ret, prt->precision) : ret;
-	prt->width > 0 ? add_width(prt, ret) : add_value_to_str(prt, ret);
-	free(ret);
+	ret = prt->width > 0 ? add_width(prt, ret) : ret;
+	return(ret);
 }

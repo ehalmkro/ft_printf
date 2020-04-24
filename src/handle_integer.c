@@ -6,18 +6,18 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/20 15:52:14 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/23 16:41:11 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static void handle_int_width(t_prt *prt, char *ret)
+static char *handle_int_width(t_prt *prt, char *ret)
 {
 	if (prt->precision >= prt->width)
-		add_value_to_str(prt, ret);
+		return(ret);
 	else
-		add_width(prt, ret);
+		return(add_width(prt, ret));
 }
 
 static char *handle_int_precision(t_prt *prt, char *value)
@@ -51,7 +51,7 @@ char *integer_length(t_prt *prt)
 	long long nb;
 
 	nb = 0;
-	if (prt->format[prt->i] == 'u')
+	if (CURR_POS == 'u')
 	{
 		nb = prt->length == h ? (unsigned short) va_arg(prt->ap, int) : nb;
 		nb = prt->length == ll ? (unsigned long long)va_arg(prt->ap, long long) : nb;
@@ -66,13 +66,13 @@ char *integer_length(t_prt *prt)
 	}
 	return (ft_itoa_base(nb, prt->base));
 }
-void output_int(t_prt *prt)
+char *output_int(t_prt *prt)
 {
 	char	*ret;
 	char	*temp;
 
-	prt->format[prt->i] == 'o' ? prt->base = 8 : 0;
-	if (prt->format[prt->i] == 'u')
+	CURR_POS == 'o' ? prt->base = 8 : 0;
+	if (CURR_POS == 'u')
 		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, unsigned int), prt->base) : integer_length(prt);
 	else
 		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int), prt->base) : integer_length(prt);
@@ -84,6 +84,6 @@ void output_int(t_prt *prt)
 		ret = handle_int_precision(prt, temp);
 
 	}
-	prt->width > 0 ? handle_int_width(prt, ret) : add_value_to_str(prt, ret);
-	free(ret);
+	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;
+	return(ret);
 }

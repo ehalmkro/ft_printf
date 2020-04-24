@@ -8,8 +8,8 @@
 int main (int argc, char **argv)
 {
 
-//	ft_printf("oma \t \"%#4x\"\n", 4442);
-//	printf("kaupan \t \"%#4x \"\n", 4442);
+	ft_printf("%#-8x\n", 42);
+	printf("%#-8x", 42);
 
 //	ft_printf("%.2s is a string\n", "this");
 //	printf("%.2s is a string\n", "this");
@@ -22,7 +22,7 @@ int main (int argc, char **argv)
 //	ft_printf("%tX\n", 4294967296);
 	//ft_printf(";%c;\n", 0);
 //	printf("%d %d\n", 2500, -2);
-	ft_printf("%d\n", -2);
+	//ft_printf("%d\n", -2);
 
 	return(0);
 }

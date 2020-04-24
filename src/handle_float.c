@@ -12,11 +12,11 @@
 
 #include "../include/ft_printf.h"
 
-void output_float(t_prt *prt)
+char *output_float(t_prt *prt)
 {
 	char *ret;
 
 	prt->precision = prt->precision == 0 ? 6 : prt->precision;
 	ret = ft_ftoa(va_arg(prt->ap, double), prt->precision);
-	add_value_to_str(prt, ret);
+	return(ret);
 }
