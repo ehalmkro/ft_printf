@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/24 14:30:57 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/28 12:48:36 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ static void parse_format(t_prt *prt)
 		if (CURR_POS == '%')
 			handle_params(prt);
 		else
+		{
+			copy_format(prt);
 			prt->i++;
-		CURR_POS == '%' ? handle_params(prt) : copy_format(prt);
+		}
 	}
 }
 

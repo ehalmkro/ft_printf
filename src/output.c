@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/24 15:57:31 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/28 12:33:28 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char *add_width(t_prt *prt, char *ret)
 	padding_char = prt->padding_char == '0' ? '0' : ' ';
 	if ((padding_count = prt->width - ft_strlen(ret)) < 0)
 		return(ret);
+	padding_count = prt->include_hash && prt->padding_char == '-' ? padding_count - 2 : padding_count;
 	padding = ft_strnew(padding_count);
 	while (padding_count > i)
 		padding[i++] = padding_char;

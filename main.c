@@ -8,11 +8,8 @@
 int main (int argc, char **argv)
 {
 
-	ft_printf("%#-8x\n", 42);
-	printf("%#-8x", 42);
-
-//	ft_printf("%.2s is a string\n", "this");
-//	printf("%.2s is a string\n", "this");
+	ft_printf("%s %s %s %s is a string\n", "this", "is not", "yes", "yo");
+	printf("%.2s %s %s is a string\n", "this", "is not", "yes");
 	//ft_printf("%f", 1245.254);
 	//printf("%f", "12.254");
 	//ft_printf("%llX\n", 4294967296);
