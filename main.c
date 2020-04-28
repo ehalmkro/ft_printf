@@ -8,8 +8,7 @@
 int main (int argc, char **argv)
 {
 
-	printf("@moulitest:' %5.x %5.0x'\n", 0, 0);
-	ft_printf("@moulitest:' %5.x %5.0x'\n", 0, 0);
+	printf("%.i %.i\n", 0, 0);
 
 //	printf("%   %");
 	//ft_printf("%f", 1245.254);
