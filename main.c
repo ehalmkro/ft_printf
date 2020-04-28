@@ -8,8 +8,10 @@
 int main (int argc, char **argv)
 {
 
-	ft_printf("%s %s %s %s is a string\n", "this", "is not", "yes", "yo");
-	printf("%.2s %s %s is a string\n", "this", "is not", "yes");
+	printf("@moulitest:' %5.x %5.0x'\n", 0, 0);
+	ft_printf("@moulitest:' %5.x %5.0x'\n", 0, 0);
+
+//	printf("%   %");
 	//ft_printf("%f", 1245.254);
 	//printf("%f", "12.254");
 	//ft_printf("%llX\n", 4294967296);

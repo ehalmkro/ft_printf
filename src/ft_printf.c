@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/28 12:48:36 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/28 14:54:46 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void init(t_prt *printf)
 	printf->output = ft_strnew(0);
 	printf->include_space = FALSE;
 	printf->include_hash = FALSE;
+	printf->include_plus = FALSE;
+	printf->include_dot = FALSE;
 	printf->length = undef;
 	printf->base = 10;
 }

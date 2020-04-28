@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 20:15:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/24 15:52:21 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/28 16:47:30 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ char *output_hex(t_prt *prt)
 	int padding;
 	char *temp;
 
+
 	prt->base = 16;
-	ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int), prt->base) : integer_length(prt);
+	ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int),
+			prt->base) : integer_length(prt);
 	padding = prt->width - ft_strlen(ret);
 	//printf("%i\n", padding);
 	if (prt->include_hash == TRUE && ft_atoi(ret) != 0 && padding < 3)
@@ -48,6 +50,11 @@ char *output_hex(t_prt *prt)
 		ret = ft_strdup(temp);
 	}
 	ret = CURR_POS == 'X' ? str_toupper(ret) : ret;
+	if (prt->include_dot == TRUE && prt->precision == 0)
+	{
+		free(ret);
+		ret = ft_strdup("");
+	}
 	ret = prt->width - ft_strlen(ret) > 0 ? add_width(prt, ret) : ret;
 	return(ret);
 }

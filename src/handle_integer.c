@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/23 16:41:11 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/28 16:45:40 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,12 @@ char *output_int(t_prt *prt)
 		temp = ft_strdup(ret);
 		free (ret);
 		ret = handle_int_precision(prt, temp);
+		free(temp);
 
 	}
+	temp = prt->include_plus == TRUE ? ft_strdup("+") : NULL;
+	ret = temp != NULL ? ft_strjoin(temp, ret) : ret;
 	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;
+	free(temp);
 	return(ret);
 }

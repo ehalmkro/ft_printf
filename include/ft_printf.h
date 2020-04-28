@@ -42,6 +42,8 @@ typedef struct		s_printf
 	size_t base;
 	e_boolean include_space;
 	e_boolean include_hash;
+	e_boolean include_plus;
+	e_boolean include_dot;
 	char padding_char;
 	size_t width;
 	e_length length;

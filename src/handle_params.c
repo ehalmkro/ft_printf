@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/24 15:52:07 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/04/28 16:42:33 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static void get_length(t_prt *prt)
 	CURR_POS == 'L' ? prt->length = L : 0;
 	while (ft_strchr(flags, CURR_POS) != NULL && CURR_POS)
 		prt->i++;
+	free(flags);
 
 }
 
@@ -79,15 +80,18 @@ static void reinit(t_prt *prt)
 	prt->precision = 0;
 	prt->include_space = FALSE;
 	prt->include_hash = FALSE;
+	prt->include_plus = FALSE;
+	prt->include_dot = FALSE;
 	prt->length = undef;
 	prt->padding_char = ' ';
 	prt->base = 10;
 }
 
-int get_precision(t_prt *prt)
+static int get_precision(t_prt *prt)
 {
 	if (CURR_POS != '.')
 		return(0);
+	prt->include_dot = TRUE;
 	prt->i++;
 	prt->precision = CURR_POS == '*' ? (size_t)va_arg(prt->ap, int)
 			: (size_t)ft_atoi(prt->format + prt->i);
@@ -96,34 +100,48 @@ int get_precision(t_prt *prt)
 	return(0);
 }
 
-int get_width(t_prt *prt) // TODO: add error handling
+static int get_flags(t_prt *prt) // TODO: add error handling
 {
 	char *flags;
 
-	flags = ft_strdup("-+ #0*");
+	flags = ft_strdup("-+ #0");
 	if (ft_strchr(flags, prt->format[++prt->i]) == NULL &&
 		ft_isdigit(CURR_POS) == 0)
 	{
 		free(flags);
 		return (0);
 	}
-	prt->include_space = CURR_POS == ' ' ? TRUE : FALSE;
-	while (CURR_POS == ' ')
-		prt->i++;
-	if (CURR_POS == '#')
+	while (ft_strchr(flags, CURR_POS))
 	{
-		prt->include_hash = TRUE;
+		if (CURR_POS == ' ')
+		{
+			prt->include_space = TRUE;
+			while (CURR_POS == ' ')
+				prt->i++;
+			if (!ft_strchr(flags, CURR_POS))
+				break;
+		}
+		CURR_POS == '#' ? prt->include_hash = TRUE : 0;
+		CURR_POS == '0' || CURR_POS == '-' ? prt->padding_char = CURR_POS : 0;
+		CURR_POS == '+' ? prt->include_plus = TRUE : 0;
 		prt->i++;
 	}
-	prt->padding_char = (CURR_POS == '0' || CURR_POS == '-')
-			? prt->format[prt->i++] : ' ';
-	prt->width = CURR_POS == '*' ? (size_t)va_arg(prt->ap, int) + 1 :
-			ft_atoi(prt->format + prt->i);
-	while (ft_isdigit(CURR_POS) || CURR_POS == '*')
-		prt->i++;
 	free(flags);
 	return(0);
 }
+
+static int get_width(t_prt *prt)
+{
+	if (ft_isdigit(CURR_POS) || CURR_POS == '*')
+	{
+		prt->width = CURR_POS == '*' ? (size_t) va_arg(prt->ap, int) + 1
+									 : ft_atoi(prt->format + prt->i);
+		while (ft_isdigit(CURR_POS) || CURR_POS == '*')
+			prt->i++;
+	}
+	return(0);
+}
+
 
 void handle_params(t_prt *prt)
 {
@@ -131,6 +149,7 @@ void handle_params(t_prt *prt)
 	char *ret;
 
 	i = 0;
+	get_flags(prt);
 	get_width(prt);
 	get_precision(prt);
 	get_length(prt);
@@ -138,8 +157,8 @@ void handle_params(t_prt *prt)
 	{
 		if (CURR_POS == g_convert_tab[i].specifier)
 		{
-			//printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nSPECIFIER \t\t %c\n",\
-		 // prt->padding_char, prt->width, prt->precision, prt->include_hash, prt->include_space, CURR_POS);
+		//	printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\n",\
+	//	  prt->padding_char, prt->width, prt->precision, prt->include_hash, prt->include_space, prt->include_plus, CURR_POS);
 			ret = g_convert_tab[i].f(prt);
 			add_value_to_str(prt, ret);
 		}
