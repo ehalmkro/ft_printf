@@ -7,8 +7,11 @@
 
 int main (int argc, char **argv)
 {
-
-	printf("%.i %.i\n", 0, 0);
+	int i;
+	i = printf("%c\t", 0);
+	printf("%i\n", i);
+	i = ft_printf("%c\t", 0);
+	printf("%i\n", i);
 
 //	printf("%   %");
 	//ft_printf("%f", 1245.254);
