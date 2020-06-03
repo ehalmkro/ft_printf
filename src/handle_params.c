@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/02 16:56:30 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/03 15:10:20 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ static void reinit(t_prt *prt)
 	prt->length = undef;
 	prt->padding_char = ' ';
 	prt->base = 10;
+	prt->strlen_value = 0;
 }
 
 static int get_precision(t_prt *prt)
@@ -157,10 +158,10 @@ void handle_params(t_prt *prt)
 	{
 		if (CURR_POS == g_convert_tab[i].specifier)
 		{
-		//	printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\n",\
+			printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\n",\
 		  prt->padding_char, prt->width, prt->precision, prt->include_hash, prt->include_space, prt->include_plus, CURR_POS);
 			ret = g_convert_tab[i].f(prt);
-			add_value_to_str(prt, ret);
+			add_value_to_str(prt, ret, prt->strlen_value);
 		}
 		i++;
 	}

@@ -56,5 +56,6 @@ char *output_hex(t_prt *prt)
 		ret = ft_strdup("");
 	}
 	ret = prt->width - ft_strlen(ret) > 0 ? add_width(prt, ret) : ret;
+	prt->strlen_value = ft_strlen(ret);
 	return(ret);
 }

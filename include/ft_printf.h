@@ -70,7 +70,7 @@ char * 				percent_format(t_prt *prt);
 
 char *str_toupper(char *str); // TODO: ADD THIS TO LIB
 
-void 				add_value_to_str(t_prt *ptr, char *value);
+void 				add_value_to_str(t_prt *ptr, char *value, size_t len);
 
 void handle_params(t_prt *prt);
 

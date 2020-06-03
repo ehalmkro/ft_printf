@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/02 11:51:10 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/03 16:27:31 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char *output_int(t_prt *prt)
 		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, unsigned int), prt->base) : integer_length(prt);
 	else
 		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int), prt->base) : integer_length(prt);
-	prt->include_space == TRUE ? add_value_to_str(prt, " ") : 0;
+	prt->include_space == TRUE ? add_value_to_str(prt, " ", 1) : 0;
 	if (prt->precision > 0)
 	{
 		temp = ft_strdup(ret);
@@ -93,5 +93,6 @@ char *output_int(t_prt *prt)
 	}
 	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;
 	free(temp);
+	prt->strlen_value = ft_strlen(ret);
 	return(ret);
 }

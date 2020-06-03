@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/03 14:06:26 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/03 16:46:53 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,30 +16,24 @@
 static int	copy_format(t_prt *prt)
 {
 	char *str;
-	size_t index;
+	size_t i;
 
-	index = 0;
-	str = (char*)malloc(sizeof(prt->i - prt->prev_i + 1));
+	i = 0;
+	str = (char*)malloc(sizeof(prt->i - prt->prev_i));
 	while (prt->prev_i <= prt->i)
-		str[index++] = prt->format[prt->prev_i++];
-	str[index] = '\0';
-	add_value_to_str(prt, str);
+		str[i++] = prt->format[prt->prev_i++];
+	add_value_to_str(prt, str, --i);
 	free(str);
 	return(0);
 }
 
 static void parse_format(t_prt *prt)
 {
-
 	while (CURR_POS)
 	{
-		if (CURR_POS == '%')
-			handle_params(prt);
-		else
-		{
-			copy_format(prt);
-			prt->i++;
-		}
+			while (CURR_POS != '%' && CURR_POS)
+				prt->i++;
+			CURR_POS == '%' ? handle_params(prt) : copy_format(prt);
 	}
 }
 
@@ -50,7 +44,8 @@ static void init(t_prt *printf)
 	printf->width = 0;
 	printf->precision = 0;
 	printf->strlen_output = 0;
-	printf->output = ft_strnew(0);
+	printf->strlen_value = 0;
+	printf->output = (char*)malloc(0);
 	printf->include_space = FALSE;
 	printf->include_hash = FALSE;
 	printf->include_plus = FALSE;

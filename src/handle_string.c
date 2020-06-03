@@ -21,5 +21,6 @@ char *output_string(t_prt *prt)
 		return("(null)");
 	ret = prt->precision > 0 ? ft_strndup(ret, prt->precision) : ret;
 	ret = prt->width > 0 ? add_width(prt, ret) : ret;
+	prt->strlen_value = ft_strlen(ret);
 	return(ret);
 }

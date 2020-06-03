@@ -6,22 +6,11 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/03 14:13:04 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/03 17:40:21 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
-
-void get_strlen(t_prt *prt, char *ret)
-{
-
-	if (CURR_POS == 'c')
-		prt->strlen_output++;
-	else
-		prt->strlen_output += ft_strlen(ret);
-	printf("ret = %s\nlen = %zu\n", ret, prt->strlen_output);
-}
-
 
 char *add_width(t_prt *prt, char *ret)
 {
@@ -61,13 +50,24 @@ char *add_width(t_prt *prt, char *ret)
 	return(ret);
 }
 
-void add_value_to_str(t_prt *ptr, char *value)
+static char *join_value_to_output(t_prt *prt, char *value, size_t len)
 {
 	char *ret;
 
+	ret = (char*)malloc(sizeof(char) * prt->strlen_output + len);
+	ft_memcpy(ret, prt->output, prt->strlen_output);
+	ft_memcpy(ret + prt->strlen_output, value, len);
+	return (ret);
+}
+
+void add_value_to_str(t_prt *ptr, char *value, size_t len)
+{
+	char *ret;
+
+	ret = (char*)malloc(sizeof(char*) * ptr->strlen_output + len);
 	ret = ft_strjoin(ptr->output, value);
 	free(ptr->output);
-	ptr->output = ft_strdup(ret);
-	get_strlen(ptr, ret);
+	ptr->output = join_value_to_output(ptr, value, len);
+	ptr->strlen_output += len;
 	free(ret);
 }

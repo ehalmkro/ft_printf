@@ -18,5 +18,6 @@ char *output_float(t_prt *prt)
 
 	prt->precision = prt->precision == 0 ? 6 : prt->precision;
 	ret = ft_ftoa(va_arg(prt->ap, double), prt->precision);
+	prt->strlen_value = ft_strlen(ret);
 	return(ret);
 }
