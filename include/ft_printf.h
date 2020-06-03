@@ -38,7 +38,6 @@ typedef struct		s_printf
 	size_t precision;
 	size_t i;
 	size_t prev_i;
-	size_t j;
 	size_t base;
 	e_boolean include_space;
 	e_boolean include_hash;
@@ -47,6 +46,9 @@ typedef struct		s_printf
 	char padding_char;
 	size_t width;
 	e_length length;
+	size_t strlen_output;
+	size_t strlen_value;
+
 }					t_prt;
 
 typedef struct  s_convert

@@ -7,11 +7,9 @@
 
 int main (int argc, char **argv)
 {
-	int i;
-	i = printf("%c\t", 0);
-	printf("%i\n", i);
-	i = ft_printf("%c\t", 0);
-	printf("%i\n", i);
+
+
+//	printf("%c\n", i);
 
 //	printf("%   %");
 	//ft_printf("%f", 1245.254);
@@ -22,7 +20,9 @@ int main (int argc, char **argv)
 //	ft_printf("%zX\n", 4294967296);
 //	ft_printf("%tX\n", 4294967296);
 	//ft_printf(";%c;\n", 0);
-//	printf("%d %d\n", 2500, -2);
+	//int i = ft_printf("%d %d\n", 2500, 10);
+	int i = ft_printf("moro");
+	printf("\nI %i\n", i);
 	//ft_printf("%d\n", -2);
 
 	return(0);

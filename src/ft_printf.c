@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/28 14:54:46 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/03 14:06:26 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static void parse_format(t_prt *prt)
 static void init(t_prt *printf)
 {
 	printf->i = 0;
-	printf->j = 0;
 	printf->prev_i = 0;
 	printf->width = 0;
 	printf->precision = 0;
+	printf->strlen_output = 0;
 	printf->output = ft_strnew(0);
 	printf->include_space = FALSE;
 	printf->include_hash = FALSE;
@@ -71,8 +71,8 @@ int ft_printf(const char *format, ...)
 		init(prt);
 		parse_format(prt);
 	}
-	ft_putstr(prt->output);
-	ret = ft_strlen(prt->output);
+	ft_putnstr(prt->output, prt->strlen_output);
+	ret = prt->strlen_output;
 	free(prt->output);
 	free(prt);
 //	while(1);
