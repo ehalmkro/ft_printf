@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/03 16:46:53 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:56:47 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,21 @@
 static int	copy_format(t_prt *prt)
 {
 	char *str;
+	char *temp;
 	size_t i;
 
 	i = 0;
-	str = (char*)malloc(sizeof(prt->i - prt->prev_i));
+	temp = ft_strnew(prt->strlen_output);
+	ft_memcpy(temp, prt->output, prt->strlen_output);
+	str = ft_strnew(prt->i - prt->prev_i);
 	while (prt->prev_i <= prt->i)
 		str[i++] = prt->format[prt->prev_i++];
-	add_value_to_str(prt, str, --i);
+	//join_value_to_output(prt, str, --i);
+	str = join_values(temp, prt->strlen_output, str, i);
+	prt->strlen_output += i;
+	free(prt->output);
+	prt->output = (char*)malloc(sizeof(char) * prt->strlen_output);
+	ft_memcpy(prt->output, str, prt->strlen_output);
 	free(str);
 	return(0);
 }
@@ -31,9 +39,19 @@ static void parse_format(t_prt *prt)
 {
 	while (CURR_POS)
 	{
-			while (CURR_POS != '%' && CURR_POS)
-				prt->i++;
-			CURR_POS == '%' ? handle_params(prt) : copy_format(prt);
+		while (CURR_POS != '%' && CURR_POS)
+			prt->i++;
+		if (CURR_POS == '%')
+		{
+			if (prt->prev_i != prt->i)
+			{
+				--prt->i;
+				copy_format(prt);
+				++prt->i;
+			}
+			handle_params(prt);
+		}
+		prt->i++;
 	}
 }
 
@@ -45,7 +63,7 @@ static void init(t_prt *printf)
 	printf->precision = 0;
 	printf->strlen_output = 0;
 	printf->strlen_value = 0;
-	printf->output = (char*)malloc(0);
+	printf->output = (char*)malloc(sizeof(char));
 	printf->include_space = FALSE;
 	printf->include_hash = FALSE;
 	printf->include_plus = FALSE;
@@ -56,7 +74,6 @@ static void init(t_prt *printf)
 int ft_printf(const char *format, ...)
 {
 	t_prt *prt;
-	int ret;
 
 	prt = (t_prt*)malloc(sizeof(t_prt));
 	if (format)
@@ -67,9 +84,7 @@ int ft_printf(const char *format, ...)
 		parse_format(prt);
 	}
 	ft_putnstr(prt->output, prt->strlen_output);
-	ret = prt->strlen_output;
-	free(prt->output);
 	free(prt);
-//	while(1);
-	return(ret);
+	//while(1);
+	return(prt->strlen_output);
 }

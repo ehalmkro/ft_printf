@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/03 17:40:21 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:37:56 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,24 @@ char *add_width(t_prt *prt, char *ret)
 	free(padding);
 	return(ret);
 }
-
-static char *join_value_to_output(t_prt *prt, char *value, size_t len)
+char *join_values(char *dst, size_t dst_len, char *src, size_t src_len)
 {
 	char *ret;
 
-	ret = (char*)malloc(sizeof(char) * prt->strlen_output + len);
-	ft_memcpy(ret, prt->output, prt->strlen_output);
-	ft_memcpy(ret + prt->strlen_output, value, len);
+	ret = (char*)malloc(sizeof(char) * dst_len + src_len);
+	ft_memcpy(ret, dst, dst_len);
+	ft_memcpy(ret + dst_len, src, src_len);
 	return (ret);
 }
 
-void add_value_to_str(t_prt *ptr, char *value, size_t len)
+void join_value_to_output(t_prt *ptr, char *value, size_t len)
 {
 	char *ret;
 
-	ret = (char*)malloc(sizeof(char*) * ptr->strlen_output + len);
-	ret = ft_strjoin(ptr->output, value);
-	free(ptr->output);
-	ptr->output = join_value_to_output(ptr, value, len);
+	ret = join_values(ptr->output, ptr->strlen_output, value, len);
 	ptr->strlen_output += len;
+	free(ptr->output);
+	ptr->output = ft_strnew(ptr->strlen_output);
+	ft_memcpy(ptr->output, ret, ptr->strlen_output);
 	free(ret);
 }

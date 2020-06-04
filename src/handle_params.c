@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/03 15:10:20 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:52:45 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,15 +158,16 @@ void handle_params(t_prt *prt)
 	{
 		if (CURR_POS == g_convert_tab[i].specifier)
 		{
-			printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\n",\
+		//	printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\n",\
 		  prt->padding_char, prt->width, prt->precision, prt->include_hash, prt->include_space, prt->include_plus, CURR_POS);
 			ret = g_convert_tab[i].f(prt);
-			add_value_to_str(prt, ret, prt->strlen_value);
+			join_value_to_output(prt, ret, prt->strlen_value);
 		}
 		i++;
 	}
 	while (ft_isalpha(CURR_POS) == 1 && CURR_POS) // TODO: PROPER CHECK TO SKIP SPECIFIERS
 		prt->i++;
 	prt->prev_i = prt->i;
+	printf("CUR POS '%c'\n CHAR %zu\n", CURR_POS, prt->i);
 	reinit(prt);
 }
