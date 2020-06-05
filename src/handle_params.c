@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/05 12:34:50 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/05 12:54:07 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_convert g_convert_tab[] =
 				{'x', &output_hex},
 				{'X', &output_hex},
 				{'n', &n_format},
+				{'%', &percent_format},
 				{'\0', NULL}
 		};
 
@@ -46,6 +47,8 @@ char *percent_format(t_prt *prt)
 	ret = ft_strnew(1);
 	ret[0] = '%';
 	ret = prt->width > 0 ? add_width(prt, ret) : ret;
+	prt->strlen_value = ft_strlen(ret);
+	prt->i++;
 	return(ret);
 
 }

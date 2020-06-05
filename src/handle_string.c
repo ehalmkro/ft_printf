@@ -18,7 +18,10 @@ char *output_string(t_prt *prt)
 
 	ret = ft_strdup(va_arg(prt->ap, char*));
 	if (ret == NULL)
-		return("(null)");
+	{
+		ret = ft_strdup("(null)");
+		prt->strlen_value = ft_strlen(ret);
+	}
 	ret = prt->precision > 0 ? ft_strndup(ret, prt->precision) : ret;
 	ret = prt->width > 0 ? add_width(prt, ret) : ret;
 	prt->strlen_value = ft_strlen(ret);

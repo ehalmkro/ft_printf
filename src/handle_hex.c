@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 20:15:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/02 11:51:10 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/05 13:10:04 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char *str_toupper(char *str) // TODO: ADD THIS TO LIB
 
 
 }
-char *output_hex(t_prt *prt)
+char *output_hex(t_prt *prt) // TODO: NEGATIVE HEX VALUES ARE LONG INT - VALUE
 {
 	char *ret;
 	int padding;
@@ -41,7 +41,6 @@ char *output_hex(t_prt *prt)
 	ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int),
 			prt->base) : integer_length(prt);
 	padding = prt->width - ft_strlen(ret);
-	//printf("%i\n", padding);
 	if (prt->include_hash == TRUE && ft_atoi(ret) != 0 && padding < 3)
 	{
 		temp = ft_strjoin("0x", ret);
