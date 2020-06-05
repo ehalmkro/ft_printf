@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/03 16:27:31 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/05 16:04:16 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ char *output_int(t_prt *prt)
 {
 	char	*ret;
 	char	*temp;
+	char 	*header;
 
+	header = NULL;
+	temp = NULL;
 	CURR_POS == 'o' ? prt->base = 8 : 0;
 	if (CURR_POS == 'u')
 		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, unsigned int), prt->base) : integer_length(prt);
@@ -84,15 +87,21 @@ char *output_int(t_prt *prt)
 		ret = handle_int_precision(prt, temp);
 		free(temp);
 	}
-	temp = prt->include_plus == TRUE ? ft_strdup("+") : NULL;
-	ret = temp != NULL && ft_atoi(ret) >= 0 ? ft_strjoin(temp, ret) : ret;
+	if (prt->include_plus)
+		header = ft_strdup("+");
+	else if (prt->include_hash && CURR_POS == 'o')
+	{
+		header = ft_strdup("0");
+		prt->width += 2;
+	}
+	ret = header != NULL && ft_atoi(ret) >= 0 ? ft_strjoin(header, ret) : ret;
 	if (prt->include_dot == TRUE && prt->precision == 0 && ft_atoi(ret) == 0)
 	{
 		free(ret);
 		ret = ft_strdup("");
 	}
 	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;
-	free(temp);
 	prt->strlen_value = ft_strlen(ret);
+	free(temp);
 	return(ret);
 }

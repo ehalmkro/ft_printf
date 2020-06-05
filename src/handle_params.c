@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/05 12:54:07 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/05 15:49:03 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ void handle_params(t_prt *prt)
 		if (CURR_POS == g_convert_tab[i].specifier)
 		{
 		//	printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\n",\
-		//  prt->padding_char, prt->width, prt->precision, prt->include_hash, prt->include_space, prt->include_plus, CURR_POS);
+		// prt->padding_char, prt->width, prt->precision, prt->include_hash, prt->include_space, prt->include_plus, CURR_POS);
 			ret = g_convert_tab[i].f(prt);
 			join_value_to_output(prt, ret, prt->strlen_value);
 		}
