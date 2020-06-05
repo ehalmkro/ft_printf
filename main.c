@@ -21,7 +21,8 @@ int main (int argc, char **argv)
 //	ft_printf("%tX\n", 4294967296);
 	//ft_printf(";%c;\n", 0);
 	//int i = ft_printf("%d %d\n", 2500, 10);
-	int i = ft_printf("12345 rrrr esa esa esa' '%i esa\n", 6664);
+	//int i = ft_printf("moro %i\nesa %f\n", 666);
+	//int j = printf("123 %i\n", 555);
 	//int j = printf("12345 rrrr esa esa esa' '%i \n", 666);
 //	printf("\nI %i\n", i);
 	//ft_printf("%d\n", -2);
