@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/16 14:46:31 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/02 11:51:10 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/05 13:12:27 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ char *output_string(t_prt *prt)
 
 	ret = ft_strdup(va_arg(prt->ap, char*));
 	if (ret == NULL)
-	{
 		ret = ft_strdup("(null)");
-		prt->strlen_value = ft_strlen(ret);
+	else
+	{
+		ret = prt->precision > 0 ? ft_strndup(ret, prt->precision) : ret;
+		ret = prt->width > 0 ? add_width(prt, ret) : ret;
 	}
-	ret = prt->precision > 0 ? ft_strndup(ret, prt->precision) : ret;
-	ret = prt->width > 0 ? add_width(prt, ret) : ret;
 	prt->strlen_value = ft_strlen(ret);
 	return(ret);
 }

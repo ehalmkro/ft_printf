@@ -9,8 +9,8 @@ int main (int argc, char **argv)
 {
 
 
-	ft_printf("%s\n", NULL);
-	printf("%s\n", NULL);
+	ft_printf("%5c\n", 42 );
+	printf("%5c\n", 42);
 
 	return(0);
 }
