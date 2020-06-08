@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/08 12:21:08 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/08 16:27:32 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static int get_flags(t_prt *prt) // TODO: add error handling
 	char *flags;
 
 	flags = ft_strdup("-+ #0");
-	if (ft_strchr(flags, prt->format[++prt->i]) == NULL &&
+	if ((ft_strchr(flags, CURR_POS) == NULL || ft_strcmp(ft_strchr(flags, CURR_POS), "") == 0) &&
 		ft_isdigit(CURR_POS) == 0)
 	{
 		free(flags);
@@ -154,16 +154,22 @@ void handle_params(t_prt *prt)
 	char *ret;
 
 	i = 0;
-	get_flags(prt);
-	get_width(prt);
-	get_precision(prt);
-	get_length(prt);
-	while (g_convert_tab[i].specifier != '\0')
+	prt->i++;
+	if (CURR_POS)
+	{
+		get_flags(prt);
+		get_width(prt);
+		get_precision(prt);
+		get_length(prt);
+	}
+
+	while (g_convert_tab[i].specifier != '\0' && CURR_POS)
 	{
 		if (CURR_POS == g_convert_tab[i].specifier)
 		{
 		//	printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\n",\
 		// prt->padding_char, prt->width, prt->precision, prt->include_hash, prt->include_space, prt->include_plus, CURR_POS);
+
 			ret = g_convert_tab[i].f(prt);
 			join_value_to_output(prt, ret, prt->strlen_value);
 		}
@@ -172,6 +178,5 @@ void handle_params(t_prt *prt)
 	while (ft_isalpha(CURR_POS) == 1 && CURR_POS) // TODO: PROPER CHECK TO SKIP SPECIFIERS
 		prt->i++;
 	prt->prev_i = prt->i;
-	//printf("CUR POS '%c'\n CHAR %zu\n", CURR_POS, prt->i);
 	reinit(prt);
 }

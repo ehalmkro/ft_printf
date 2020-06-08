@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/08 12:23:57 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/08 15:10:09 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char * add_width(t_prt *prt, char *ret)
 	temp = prt->padding_char == '-' ? join_values(ret, prt->strlen_value, padding, i) :
 		join_values(padding, i, ret, prt->strlen_value);
 	ft_memcpy(ret, temp, i + prt->strlen_value + 1);
+	ret[i + prt->strlen_value] = '\0';
 	free(temp);
 	free(padding);
 	return(ret);
@@ -65,6 +66,8 @@ void join_value_to_output(t_prt *ptr, char *value, size_t len)
 {
 	char *ret;
 
+	if (value == NULL || len == 0)
+		return;
 	ret = join_values(ptr->output, ptr->strlen_output, value, len);
 	ptr->strlen_output += len;
 	free(ptr->output);

@@ -22,7 +22,11 @@ char *output_string(t_prt *prt)
 		ret = ft_strdup("(null)");
 	else
 	{
-		ret = prt->precision > 0 ? ft_strndup(ret, prt->precision) : ret;
+		if (prt->precision > 0)
+		{
+			ret = ft_strndup(ret, prt->precision);
+			prt->strlen_value = ft_strlen(ret);
+		}
 		ret = prt->width > 0 ? add_width(prt, ret) : ret;
 	}
 	prt->strlen_value = ft_strlen(ret);

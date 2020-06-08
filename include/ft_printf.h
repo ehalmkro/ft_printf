@@ -35,7 +35,7 @@ typedef struct		s_printf
 	char *output;
 	va_list ap;
 
-	size_t precision;
+	int precision;
 	size_t i;
 	size_t prev_i;
 	size_t base;
@@ -44,10 +44,10 @@ typedef struct		s_printf
 	e_boolean include_plus;
 	e_boolean include_dot;
 	char padding_char;
-	size_t width;
+	int width;
 	e_length length;
-	size_t strlen_output;
-	size_t strlen_value;
+	int strlen_output;
+	int strlen_value;
 
 }					t_prt;
 

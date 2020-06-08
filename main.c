@@ -9,7 +9,13 @@ int main (int argc, char **argv)
 {
 
 	//printf("%s\n", join_values("   ", 3, "esa", 3));
-	int i = ft_printf("%5%");
+	//ft_printf("%Z");
+	//printf("\n");
+	//printf("%Moor");
+//	printf("\n");
+	int j = ft_printf("%%");
+	printf("%i\n", j);
+
 //	printf("\n%i\n", i);
 	///printf("%-#6o", 2500);
 
