@@ -13,8 +13,12 @@ int main (int argc, char **argv)
 	//printf("\n");
 	//printf("%Moor");
 //	printf("\n");
-	int j = ft_printf("%%");
-	printf("%i\n", j);
+	int j = ft_printf("% d", -42);
+	printf("\n");
+	printf("%+d", +42);
+	printf("\n");
+
+
 
 //	printf("\n%i\n", i);
 	///printf("%-#6o", 2500);

@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/08 10:49:07 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/08 17:32:46 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char *integer_length(t_prt *prt)
 	}
 	return (ft_itoa_base(nb, prt->base));
 }
-char *output_int(t_prt *prt)
+char *output_int(t_prt *prt)			// TODO: REFACTOR with long long nb = va_arg... + handle int width
 {
 	char	*ret;
 	char	*temp;
@@ -80,7 +80,7 @@ char *output_int(t_prt *prt)
 		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, unsigned int), prt->base) : integer_length(prt);
 	else
 		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int), prt->base) : integer_length(prt);
-	prt->include_space == TRUE ? join_value_to_output(prt, " ", 1) : 0;
+	prt->include_space == TRUE && prt->include_plus != TRUE && ft_atoi(ret) > 0 ? join_value_to_output(prt, " ", 1) : 0;
 	if (prt->precision > 0)
 	{
 		temp = ft_strdup(ret);

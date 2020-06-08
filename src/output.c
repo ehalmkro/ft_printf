@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/08 15:10:09 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/08 15:10:46 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ char * add_width(t_prt *prt, char *ret)
 		join_values(padding, i, ret, prt->strlen_value);
 	ft_memcpy(ret, temp, i + prt->strlen_value + 1);
 	ret[i + prt->strlen_value] = '\0';
+	prt->strlen_value += i;
 	free(temp);
 	free(padding);
 	return(ret);
