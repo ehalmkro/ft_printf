@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 20:15:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/05 13:10:04 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/08 10:42:19 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ char *output_hex(t_prt *prt) // TODO: NEGATIVE HEX VALUES ARE LONG INT - VALUE
 		free(ret);
 		ret = ft_strdup("");
 	}
+	prt->strlen_value = ft_strlen(ret);
 	ret = prt->width - ft_strlen(ret) > 0 ? add_width(prt, ret) : ret;
 	prt->strlen_value = ft_strlen(ret);
 	return(ret);

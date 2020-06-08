@@ -12,7 +12,7 @@
 
 #include "../include/ft_printf.h"
 
-char *output_float(t_prt *prt)
+char *output_float(t_prt *prt) // TODO: FLOAT PRECISION!
 {
 	char *ret;
 

@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/05 16:04:16 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/08 10:49:07 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static char *handle_int_precision(t_prt *prt, char *value)
 	}
 	padding[i] = '\0';
 	ret = ft_strjoin(padding, value);
+	prt->strlen_value = ft_strlen(ret);
 	free(padding);
 	return (ret);
 }
@@ -100,8 +101,9 @@ char *output_int(t_prt *prt)
 		free(ret);
 		ret = ft_strdup("");
 	}
-	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;
 	prt->strlen_value = ft_strlen(ret);
-	free(temp);
+	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;
+	//temp ? free(temp) : 0;
+	prt->strlen_value = ft_strlen(ret);
 	return(ret);
 }

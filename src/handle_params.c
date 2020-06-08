@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/05 15:49:03 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/08 12:21:08 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ char *percent_format(t_prt *prt)
 
 	ret = ft_strnew(1);
 	ret[0] = '%';
+	prt->strlen_value = 1;
 	ret = prt->width > 0 ? add_width(prt, ret) : ret;
 	prt->strlen_value = ft_strlen(ret);
 	prt->i++;

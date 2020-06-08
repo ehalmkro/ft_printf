@@ -8,10 +8,10 @@
 int main (int argc, char **argv)
 {
 
-
-	ft_printf("%-#6o", 2500);
-	printf("\n");
-	printf("%-#6o", 2500);
+	//printf("%s\n", join_values("   ", 3, "esa", 3));
+	int i = ft_printf("%5%");
+//	printf("\n%i\n", i);
+	///printf("%-#6o", 2500);
 
 	return(0);
 }
