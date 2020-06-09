@@ -2,6 +2,7 @@
 #define FT_PRINTF_H
 
 #define CURR_POS prt->format[prt->i]
+#define NEXT_POS prt->format[prt->i + 1]
 #include <stdio.h>						// TODO: REMOVE THIS
 #include <string.h>						// TODO: REMOVE THIS
 #include <stdarg.h>
@@ -43,6 +44,8 @@ typedef struct		s_printf
 	e_boolean include_hash;
 	e_boolean include_plus;
 	e_boolean include_dot;
+	e_boolean include_zero;
+	e_boolean include_minus;
 	char padding_char;
 	int width;
 	e_length length;
@@ -60,6 +63,10 @@ typedef struct  s_convert
 
 int					ft_printf(const char *format, ...);
 
+void hex_width(t_prt *prt, char **ret, char **padding, char padding_char, int *padding_count);
+void int_width(t_prt *prt, char **ret, char **padding, int *padding_count);
+
+
 char *				output_int(t_prt *prt);
 char * 				output_hex(t_prt *prt);
 char * 				output_string(t_prt *prt);
@@ -68,7 +75,7 @@ char *				output_float(t_prt *prt);
 char *				n_format(t_prt *prt);
 char * 				percent_format(t_prt *prt);
 
-char *str_toupper(char *str); // TODO: ADD THIS TO LIB
+char *ft_strupr(char *str); // TODO: ADD THIS TO LIB
 
 void 				join_value_to_output(t_prt *ptr, char *value, size_t len);
 char 				*join_values(char *dst, size_t dst_len, char *src, size_t src_len);

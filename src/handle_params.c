@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/08 16:27:32 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/09 12:37:37 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,10 +127,12 @@ static int get_flags(t_prt *prt) // TODO: add error handling
 				break;
 		}
 		CURR_POS == '#' ? prt->include_hash = TRUE : 0;
-		CURR_POS == '0' || CURR_POS == '-' ? prt->padding_char = CURR_POS : 0;
+		CURR_POS == '0' ? prt->include_zero = TRUE : 0;
+		CURR_POS == '-' ? prt->include_minus = TRUE : 0;
 		CURR_POS == '+' ? prt->include_plus = TRUE : 0;
 		prt->i++;
 	}
+	prt->padding_char = prt->include_zero && !prt->include_minus ? '0' : ' ';
 	free(flags);
 	return(0);
 }

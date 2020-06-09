@@ -6,11 +6,23 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/08 17:32:46 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/09 16:08:01 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+
+void int_width(t_prt *prt, char **ret, char **padding, int *padding_count)
+{
+	char temp;
+
+	(void)prt;
+	(void)padding_count;
+
+	temp = (*ret)[0];
+	(*ret)[0] = (*padding)[0];
+	(*padding)[0] = temp;
+}
 
 static char *handle_int_width(t_prt *prt, char *ret)
 {
@@ -104,6 +116,5 @@ char *output_int(t_prt *prt)			// TODO: REFACTOR with long long nb = va_arg... +
 	prt->strlen_value = ft_strlen(ret);
 	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;
 	//temp ? free(temp) : 0;
-	prt->strlen_value = ft_strlen(ret);
 	return(ret);
 }

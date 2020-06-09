@@ -6,30 +6,36 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 20:15:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/08 13:00:46 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/09 15:27:26 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-char *str_toupper(char *str) // TODO: ADD THIS TO LIB
+void hex_width(t_prt *prt, char **ret, char **padding, char padding_char, int *padding_count)
 {
-	size_t i;
-	char *ret;
 
-	ret = ft_strnew(ft_strlen(str));
-	i = 0;
-	while (str[i])
+	(*padding)[1] = prt->strlen_value < prt->width && padding_char == '0' ? CURR_POS : (*padding)[1];
+	if (padding_char == ' ')
 	{
-		ret[i] = ft_toupper(str[i]);
-		i++;
+
+		if (!prt->include_minus)
+		{
+			(*padding)[*padding_count] = '\0';
+			(*padding)[--*padding_count] = 'x';
+			(*padding)[--*padding_count] = '0';
+			*padding = CURR_POS == 'X' ? ft_strupr(*padding) : *padding;
+		}
+		else
+		{
+			*ret = CURR_POS == 'x' ? join_values("0x", 2, *ret, prt->strlen_value)
+				: join_values("0X", 2, *ret, prt->strlen_value);
+			prt->strlen_value += 2;
+			*padding_count -= 2;
+		}
 	}
-	ret[i] = '\0';
-	free(str);
-	return(ret);
-
-
 }
+
 char *output_hex(t_prt *prt) // TODO: NEGATIVE HEX VALUES ARE LONG INT - VALUE
 {
 	char *ret;
@@ -48,7 +54,7 @@ char *output_hex(t_prt *prt) // TODO: NEGATIVE HEX VALUES ARE LONG INT - VALUE
 		free(ret);
 		ret = ft_strdup(temp);
 	}
-	ret = CURR_POS == 'X' ? str_toupper(ret) : ret;
+	ret = CURR_POS == 'X' ? ft_strupr(ret) : ret;
 	if (prt->include_dot == TRUE && prt->precision == 0)
 	{
 		free(ret);
@@ -56,10 +62,6 @@ char *output_hex(t_prt *prt) // TODO: NEGATIVE HEX VALUES ARE LONG INT - VALUE
 	}
 	prt->strlen_value = ft_strlen(ret);
 	if (prt->width - ft_strlen(ret) > 0 && prt->width != 0)
-	{
-		add_width(prt, ret);
-		prt->strlen_value = ft_strlen(ret);
-	}
-
+		ret = add_width(prt, ret);
 	return(ret);
 }
