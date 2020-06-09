@@ -3,6 +3,11 @@
 
 #define CURR_POS prt->format[prt->i]
 #define NEXT_POS prt->format[prt->i + 1]
+
+#define INT_MIN -2147483648
+#define INT_MAX 2147483647
+#define UINT_MAX 4294967295
+
 #include <stdio.h>						// TODO: REMOVE THIS
 #include <string.h>						// TODO: REMOVE THIS
 #include <stdarg.h>
