@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strupr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/16 14:16:08 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/01/31 15:05:27 by ehalmkro         ###   ########.fr       */
+/*   Created: 2020/06/09 15:27:46 by ehalmkro          #+#    #+#             */
+/*   Updated: 2020/06/09 15:28:38 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char *ft_strupr(char *str)
 {
-	size_t	i;
+	size_t i;
+	char *ret;
 
+	ret = ft_strnew(ft_strlen(str));
 	i = 0;
-	if (!s)
-		return (i);
-	while (s[i])
+	while (str[i])
+	{
+		ret[i] = ft_toupper(str[i]);
 		i++;
-	return (i);
+	}
+	ret[i] = '\0';
+	free(str);
+	return(ret);
+
+
 }

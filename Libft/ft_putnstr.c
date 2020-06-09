@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/16 14:16:08 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/01/31 15:05:27 by ehalmkro         ###   ########.fr       */
+/*   Created: 2020/06/02 16:30:16 by ehalmkro          #+#    #+#             */
+/*   Updated: 2020/06/02 16:30:16 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void ft_putnstr(char *str, size_t len)
 {
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (i);
-	while (s[i])
-		i++;
-	return (i);
+	if (str)
+		write(1, str, len);
 }

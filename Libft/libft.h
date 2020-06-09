@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 14:29:54 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/17 12:10:07 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/03 16:55:54 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void				ft_putendl(char const *s);
 void				ft_putnbr(int n);
 void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char const *s, int fd);
+void 				ft_putnstr(char *str, size_t len);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 
@@ -106,5 +107,6 @@ int				ft_count_if(char **tab, int (*f)(char*));
 int 				get_next_line(const int fd, char **line);
 
 long double 		ft_modf(long double x, long double *integer);
+char 				*ft_strupr(char *str);
 
 #endif
