@@ -13,9 +13,9 @@ int main (int argc, char **argv)
 	//printf("\n");
 	//printf("%Moor");
 //	printf("\n");
-	int j = ft_printf("%-05d", 42);
+	int j = ft_printf("%lld", 4294967296);
 	printf("\n");
-	printf("%-05d", 42);
+	printf("%lld", -9223372036854775808);
 	printf("\n");
 
 

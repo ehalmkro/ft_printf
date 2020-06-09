@@ -75,7 +75,7 @@ char *				output_float(t_prt *prt);
 char *				n_format(t_prt *prt);
 char * 				percent_format(t_prt *prt);
 
-char *ft_strupr(char *str); // TODO: ADD THIS TO LIB
+char *ft_strupr(char *str);
 
 void 				join_value_to_output(t_prt *ptr, char *value, size_t len);
 char 				*join_values(char *dst, size_t dst_len, char *src, size_t src_len);

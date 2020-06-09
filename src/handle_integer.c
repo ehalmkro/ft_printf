@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/09 16:08:01 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/09 16:57:50 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void int_width(t_prt *prt, char **ret, char **padding, int *padding_count)
 
 	(void)prt;
 	(void)padding_count;
-
+	if (!padding[1])
+		return;
 	temp = (*ret)[0];
 	(*ret)[0] = (*padding)[0];
 	(*padding)[0] = temp;
@@ -92,7 +93,6 @@ char *output_int(t_prt *prt)			// TODO: REFACTOR with long long nb = va_arg... +
 		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, unsigned int), prt->base) : integer_length(prt);
 	else
 		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int), prt->base) : integer_length(prt);
-	prt->include_space == TRUE && prt->include_plus != TRUE && ft_atoi(ret) > 0 ? join_value_to_output(prt, " ", 1) : 0;
 	if (prt->precision > 0)
 	{
 		temp = ft_strdup(ret);
@@ -115,6 +115,7 @@ char *output_int(t_prt *prt)			// TODO: REFACTOR with long long nb = va_arg... +
 	}
 	prt->strlen_value = ft_strlen(ret);
 	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;
+	prt->include_space && !prt->include_plus && ft_atoi(ret) > 0 && !ft_strchr(ret, ' ') ? join_value_to_output(prt, " ", 1) : 0;
 	//temp ? free(temp) : 0;
 	return(ret);
 }

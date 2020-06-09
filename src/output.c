@@ -21,7 +21,7 @@ char *add_width(t_prt *prt, char *ret)
 	char *temp;
 
 	i = 0;
-	padding_char = prt->padding_char == '0' ? '0' : ' ';
+	padding_char = prt->padding_char == '0' && prt->precision == 0 ? '0' : ' ';
 	if ((padding_count = prt->width - prt->strlen_value) < 0)
 		return (ret);
 	padding_count = prt->include_hash && CURR_POS != 'X' && CURR_POS != 'x' ? padding_count - 2 : padding_count;
