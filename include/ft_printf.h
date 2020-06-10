@@ -11,7 +11,6 @@
 #include <stdio.h>						// TODO: REMOVE THIS
 #include <string.h>						// TODO: REMOVE THIS
 #include <stdarg.h>
-#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "../Libft/libft.h"
@@ -72,13 +71,14 @@ void hex_width(t_prt *prt, char **ret, char **padding, char padding_char, int *p
 void int_width(t_prt *prt, char **ret, char **padding, int *padding_count);
 
 
-char *				output_int(t_prt *prt);
-char * 				output_hex(t_prt *prt);
-char * 				output_string(t_prt *prt);
-char *				output_char(t_prt *prt);
-char *				output_float(t_prt *prt);
-char *				n_format(t_prt *prt);
-char * 				percent_format(t_prt *prt);
+char 				*output_int(t_prt *prt);
+char 				*output_hex(t_prt *prt);
+char 				*output_string(t_prt *prt);
+char 				*output_char(t_prt *prt);
+char 				*output_float(t_prt *prt);
+char 				*n_format(t_prt *prt);
+char 				*percent_format(t_prt *prt);
+char 				*output_pointer(t_prt *prt);
 
 char *ft_strupr(char *str);
 

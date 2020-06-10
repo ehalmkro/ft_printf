@@ -13,15 +13,13 @@ int main (int argc, char **argv)
 	//printf("\n");
 	//printf("%Moor");
 //	printf("\n");
-	ft_printf("@moulitest: %#.o %#.0o", 0, 0);
+	int i = ft_printf("Line Feed %s", "\\n");
 	printf("\n");
-	printf("@moulitest: %#.o %#.0o", 0, 0);
+	int j = printf("%");
 	printf("\n");
-
-
-
+	printf("Line Feed %s", "\\n");
 //	printf("\n%i\n", i);
 	///printf("%-#6o", 2500);
-
 	return(0);
+	// TODO: POINTERS!
 }

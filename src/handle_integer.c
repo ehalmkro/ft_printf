@@ -80,7 +80,7 @@ char *integer_length(t_prt *prt)
 	}
 	return (ft_itoa_base(nb, prt->base));
 }
-char *output_int(t_prt *prt)			// TODO: REFACTOR with long long nb = va_arg... + handle int width
+char *output_int(t_prt *prt)			// TODO: REFACTOR with long long nb?
 {
 	char	*ret;
 	char	*temp;

@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 20:15:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/09 17:14:05 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/10 11:56:40 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,15 @@ void hex_width(t_prt *prt, char **ret, char **padding, char padding_char, int *p
 char *output_hex(t_prt *prt) // TODO: NEGATIVE HEX VALUES ARE LONG INT - VALUE
 {
 	char *ret;
-	int padding;
+	int padding_count;
 	char *temp;
 
 	prt->base = 16;
 	ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int),
 			prt->base) : integer_length(prt);
-	padding = prt->width - ft_strlen(ret);
-	if (prt->include_hash == TRUE && ft_atoi(ret) != 0 && padding < 3)
+	padding_count = prt->width - ft_strlen(ret);
+	if (prt->include_hash == TRUE && ((ft_atoi(ret) != 0 && padding_count < 3) ||
+	CURR_POS == 'p'))
 	{
 		temp = ft_strjoin("0x", ret);
 		prt->include_hash = FALSE;

@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/08 15:19:09 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/10 13:49:40 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,12 @@ static int	copy_format(t_prt *prt)
 	temp = ft_strnew(prt->strlen_output);
 	ft_memcpy(temp, prt->output, prt->strlen_output);
 	str = ft_strnew(prt->i - prt->prev_i);
-	while (prt->prev_i <= prt->i)
-		str[i++] = prt->format[prt->prev_i++];
-	//join_value_to_output(prt, str, --i);
+		while (prt->prev_i <= prt->i)
+		{
+			str[i] = prt->format[prt->prev_i];
+			i++;
+			prt->prev_i++;
+		}
 	str = join_values(temp, prt->strlen_output, str, i);
 	if (!CURR_POS)
 		--i;

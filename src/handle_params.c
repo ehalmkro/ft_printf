@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/09 12:37:37 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/10 13:39:41 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_convert g_convert_tab[] =
 				{'x', &output_hex},
 				{'X', &output_hex},
 				{'n', &n_format},
-				{'%', &percent_format},
+				{'p', &output_pointer},
 				{'\0', NULL}
 		};
 
@@ -49,7 +49,6 @@ char *percent_format(t_prt *prt)
 	prt->strlen_value = 1;
 	ret = prt->width > 0 ? add_width(prt, ret) : ret;
 	prt->strlen_value = ft_strlen(ret);
-	prt->i++;
 	return(ret);
 
 }
@@ -157,6 +156,7 @@ void handle_params(t_prt *prt)
 
 	i = 0;
 	prt->i++;
+
 	if (CURR_POS)
 	{
 		get_flags(prt);
@@ -177,8 +177,7 @@ void handle_params(t_prt *prt)
 		}
 		i++;
 	}
-	while (ft_isalpha(CURR_POS) == 1 && CURR_POS) // TODO: PROPER CHECK TO SKIP SPECIFIERS
-		prt->i++;
+	CURR_POS ? prt->i++ : 0;
 	prt->prev_i = prt->i;
 	reinit(prt);
 }
