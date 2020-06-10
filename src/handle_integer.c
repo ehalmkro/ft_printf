@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/09 16:58:24 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/10 16:19:21 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@ static char *handle_int_width(t_prt *prt, char *ret)
 	if (prt->precision >= prt->width)
 		return(ret);
 	else
-		return(add_width(prt, ret));
+	{
+		ret = add_width(prt, ret);
+		return(ret);
+	}
 }
 
 static char *handle_int_precision(t_prt *prt, char *value)
@@ -102,12 +105,12 @@ char *output_int(t_prt *prt)			// TODO: REFACTOR with long long nb?
 	}
 	if (prt->include_plus)
 		header = ft_strdup("+");
-	else if (prt->include_hash && CURR_POS == 'o')
+	else if (prt->include_hash && CURR_POS == 'o' && ft_atoi(ret) != 0)
 	{
 		header = ft_strdup("0");
 		prt->width += 2;
 	}
-	ret = header != NULL && ft_atoi(ret) >= 0 ? ft_strjoin(header, ret) : ret;
+	ret = header != NULL && (ft_atoi(ret) >= 0 && (prt->include_plus || prt->include_hash)) ? ft_strjoin(header, ret) : ret;
 	if (prt->include_dot == TRUE && prt->precision == 0 && ft_atoi(ret) == 0)
 	{
 		free(ret);

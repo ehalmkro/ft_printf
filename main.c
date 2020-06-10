@@ -3,6 +3,7 @@
 //
 
 #include <stdlib.h>
+#include <limits.h>
 #include "include/ft_printf.h"
 
 int main (int argc, char **argv)
@@ -13,13 +14,12 @@ int main (int argc, char **argv)
 	//printf("\n");
 	//printf("%Moor");
 //	printf("\n");
-	int i = ft_printf("Line Feed %s", "\\n");
+
+
+int i = printf("{%30d}", 10000);
 	printf("\n");
-	int j = printf("%");
-	printf("\n");
-	printf("Line Feed %s", "\\n");
-//	printf("\n%i\n", i);
-	///printf("%-#6o", 2500);
+int j =	ft_printf("{%30d}", 10000);
+	printf("\n%i\n%i\n", i, j);
 	return(0);
 	// TODO: POINTERS!
 }

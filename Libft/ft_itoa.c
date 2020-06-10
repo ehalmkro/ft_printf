@@ -37,7 +37,7 @@ static char		*retwrite(char *ret)
 	return (ret);
 }
 
-char			*ft_itoa(long long n)
+char			*ft_itoa(uintmax_t n)
 {
 	char		*ret;
 	long long	nb;

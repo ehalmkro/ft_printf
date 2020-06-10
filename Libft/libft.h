@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 14:29:54 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/03 16:55:54 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/10 16:00:50 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ char				*ft_strsub(char const *s, unsigned int start, size_t len);
 char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 
-char				*ft_itoa(long long n);
-char 				*ft_itoa_base(long long nb, int base);
+char				*ft_itoa(uintmax_t n);
+char 				*ft_itoa_base(intmax_t nb, int base);
 char 				*ft_ftoa(long double nb, int precision);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 

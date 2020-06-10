@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/09 16:08:37 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/10 16:23:52 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char *add_width(t_prt *prt, char *ret)
 	char *padding;
 	char padding_char;
 	char *temp;
-
 	i = 0;
 	padding_char = prt->padding_char == '0' && prt->precision == 0 ? '0' : ' ';
 	if ((padding_count = prt->width - prt->strlen_value) < 0)
@@ -34,10 +33,10 @@ char *add_width(t_prt *prt, char *ret)
 		int_width(prt, &ret, &padding, &padding_count);
 	temp = prt->include_minus ? join_values(ret, prt->strlen_value, padding, padding_count) :
 		join_values(padding, i, ret, prt->strlen_value);
-	prt->include_minus ? ft_memcpy(ret, temp, padding_count + prt->strlen_value + 1) : ft_memcpy(ret, temp, i + prt->strlen_value + 1);
+	prt->include_minus ? ft_memmove(ret, temp, padding_count + prt->strlen_value + 1) : ft_memmove(ret, temp, i + prt->strlen_value + 1);
 	prt->strlen_value = prt->include_minus ? prt->strlen_value + padding_count : prt->strlen_value + i;
-	free(temp);
-	free(padding);
+//	free(temp);
+//	free(padding);
 	return(ret);
 }
 char *join_values(char *dst, size_t dst_len, char *src, size_t src_len)
@@ -45,8 +44,8 @@ char *join_values(char *dst, size_t dst_len, char *src, size_t src_len)
 	char *ret;
 
 	ret = (char*)malloc(sizeof(char) * dst_len + src_len);
-	ft_memcpy(ret, dst, dst_len);
-	ft_memcpy(ret + dst_len, src, src_len);
+	ft_memmove(ret, dst, dst_len);
+	ft_memmove(ret + dst_len, src, src_len);
 	return (ret);
 }
 
@@ -60,6 +59,6 @@ void join_value_to_output(t_prt *ptr, char *value, size_t len)
 	ptr->strlen_output += len;
 	free(ptr->output);
 	ptr->output = ft_strnew(ptr->strlen_output);
-	ft_memcpy(ptr->output, ret, ptr->strlen_output);
+	ft_memmove(ptr->output, ret, ptr->strlen_output);
 	free(ret);
 }
