@@ -88,6 +88,8 @@ char *ft_strupr(char *str);
 void 				join_value_to_output(t_prt *ptr, char *value, size_t len);
 char 				*join_values(char *dst, size_t dst_len, char *src, size_t src_len);
 
+char *handle_int_precision(t_prt *prt, char *value);
+
 
 
 void handle_params(t_prt *prt);

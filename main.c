@@ -6,20 +6,35 @@
 #include <limits.h>
 #include "include/ft_printf.h"
 
+void compare_printf(char *str)
+{
+	int i = printf(str);
+	printf("\n");
+	int j = ft_printf(str);
+	printf("\n");
+	printf("SYS %i\tOWN %i\n\n", i, j);
+}
+
+void compare_printf_1(char *str, int value1)
+{
+	int i = printf(str, value1);
+	printf("\n");
+	int j = ft_printf(str, value1);
+	printf("\n");
+	printf("SYS %i\tOWN %i\n\n", i, j);
+}
+
+void compare_printf_2(char *str, int value1, value2)
+{
+	int i = printf(str, value1, value2);
+	printf("\n");
+	int j = ft_printf(str, value1, value2);
+	printf("\n");
+	printf("SYS %i\tOWN %i\n\n", i, j);
+}
+
 int main (int argc, char **argv)
 {
-
-	//printf("%s\n", join_values("   ", 3, "esa", 3));
-	//ft_printf("%Z");
-	//printf("\n");
-	//printf("%Moor");
-//	printf("\n");
-
-
-int i = printf("{%30d}", 10000);
-	printf("\n");
-int j =	ft_printf("{%30d}", 10000);
-	printf("\n%i\n%i\n", i, j);
+	compare_printf_1("%5+d", 42);
 	return(0);
-	// TODO: POINTERS!
 }

@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/10 16:13:35 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/11 15:59:48 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ static int get_precision(t_prt *prt)
 	return(0);
 }
 
-static int get_flags(t_prt *prt) // TODO: add error handling
+static int get_flags(t_prt *prt)
 {
 	char *flags;
 
@@ -115,14 +115,14 @@ static int get_flags(t_prt *prt) // TODO: add error handling
 		free(flags);
 		return (0);
 	}
-	while (ft_strchr(flags, CURR_POS))
+	while (ft_strchr(flags, CURR_POS) && CURR_POS)
 	{
 		if (CURR_POS == ' ')
 		{
 			prt->include_space = TRUE;
 			while (CURR_POS == ' ')
 				prt->i++;
-			if (!ft_strchr(flags, CURR_POS))
+			if (!ft_strchr(flags, CURR_POS) ||!CURR_POS)
 				break;
 		}
 		CURR_POS == '#' ? prt->include_hash = TRUE : 0;
@@ -140,10 +140,17 @@ static int get_width(t_prt *prt)
 {
 	if (ft_isdigit(CURR_POS) || CURR_POS == '*')
 	{
-		prt->width = CURR_POS == '*' ? (size_t) va_arg(prt->ap, int) + 1
-			: ft_atoi(prt->format + prt->i);
-		while (ft_isdigit(CURR_POS) || CURR_POS == '*')
+		if (CURR_POS == '*')
+		{
+			prt->width = (size_t)va_arg(prt->ap, int) + 1;
 			prt->i++;
+		}
+		if (ft_isdigit(CURR_POS))
+		{
+			prt->width = ft_atoi(prt->format + prt->i);
+			while (ft_isdigit(CURR_POS))
+				prt->i++;
+		}
 	}
 	return(0);
 }
@@ -154,9 +161,9 @@ void handle_params(t_prt *prt)
 	int i;
 	char *ret;
 
+	ret = NULL;
 	i = 0;
 	prt->i++;
-
 	if (CURR_POS)
 	{
 		get_flags(prt);
@@ -164,20 +171,19 @@ void handle_params(t_prt *prt)
 		get_precision(prt);
 		get_length(prt);
 	}
-
 	while (g_convert_tab[i].specifier != '\0' && CURR_POS)
 	{
 		if (CURR_POS == g_convert_tab[i].specifier)
 		{
-		//	printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %lu\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\n",\
-		// prt->padding_char, prt->width, prt->precision, prt->include_hash, prt->include_space, prt->include_plus, CURR_POS);
+		//printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %i\nINCLUDE DOT \t %i\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\nLENGTH \t\t%i\n",
+		//prt->padding_char, prt->width, prt->precision, prt->include_dot, prt->include_hash, prt->include_space, prt->include_plus, CURR_POS, prt->length);
 
 			ret = g_convert_tab[i].f(prt);
 			join_value_to_output(prt, ret, prt->strlen_value);
 		}
 		i++;
 	}
-	CURR_POS ? prt->i++ : 0;
+	CURR_POS && ret != NULL ? prt->i++ : 0;
 	prt->prev_i = prt->i;
 	reinit(prt);
 }

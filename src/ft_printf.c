@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/10 16:13:35 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/11 15:53:45 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	copy_format(t_prt *prt)
 		}
 	str = join_values(temp, prt->strlen_output, str, i);
 	if (!CURR_POS)
-		--i;
+		i--;
 	prt->strlen_output += i;
 	free(prt->output);
 	prt->output = (char*)malloc(sizeof(char) * prt->strlen_output);
