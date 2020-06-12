@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 20:15:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 13:30:48 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 15:20:46 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ char *output_hex(t_prt *prt) // TODO: NEGATIVE HEX VALUES ARE LONG INT - VALUE
 	intmax_t nb;
 
 	prt->base = 16;
-	nb = integer_length(prt);
+	prt->u_sign = TRUE;
+	nb = get_integer_length(prt);
 	ret = ft_itoa_base(nb, prt->base);
 	padding_count = prt->width - ft_strlen(ret);
 	if (prt->include_dot == TRUE)

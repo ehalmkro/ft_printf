@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 14:02:02 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 17:46:46 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ void handle_params(t_prt *prt)
 	ret = NULL;
 	i = 0;
 	prt->i++;
-	while (!ft_strchr("scSCdDiuUoOxXbp%", CURR_POS))
+	while (!ft_strchr("scSCdDiuUoOxXbpfF%", CURR_POS) && CURR_POS) //TODO: CHECK B
 	{
 		get_flags(prt);
 		get_width(prt);

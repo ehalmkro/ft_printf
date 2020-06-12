@@ -6,20 +6,19 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:06:42 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/04/20 13:49:35 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 18:10:39 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>							//TODO: remove this
 
-char *output_fract_part(long double nb, int precision)
+char *output_fract_part(long double nb, int precision) // TODO: REFACTOR TO OUTPUT THE RIGHT AMOUNT OF ZEROS
 {
 	char *ret;
-
 	while (precision-- > 0)
 		nb *= 10;
-	ret = ft_itoa((long long)nb);
+	ret = ft_itoa_base(ft_round(nb), 10);
 	return (ret);
 }
 

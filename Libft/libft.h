@@ -107,6 +107,8 @@ int				ft_count_if(char **tab, int (*f)(char*));
 int 				get_next_line(const int fd, char **line);
 
 long double 		ft_modf(long double x, long double *integer);
+long long 			ft_round(long double nb);
+
 char 				*ft_strupr(char *str);
 
 #endif

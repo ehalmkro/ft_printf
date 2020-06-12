@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 14:02:42 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 16:30:23 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char *handle_int_precision(t_prt *prt, char *value)
 	return (ret);
 }
 
-intmax_t integer_length(t_prt *tab)
+intmax_t get_integer_length(t_prt *tab)
 {
 	intmax_t nb;
 
@@ -108,13 +108,14 @@ char *output_int(t_prt *prt)
 		prt->u_sign = TRUE;
 		prt->base = CURR_POS == 'o' ? 8 : prt->base;
 	}
-	nb = integer_length(prt);
+	prt->include_zero = prt->include_dot && prt->include_zero ? FALSE : prt->include_zero;
+	nb = get_integer_length(prt);
 	ret = ft_itoa_base(nb, prt->base);
 	if (prt->include_dot)
 	{
 		temp = ft_strdup(ret);
 		free (ret);
-		ret = (int)ft_strlen(ret) < prt->precision ? handle_int_precision(prt, temp) : ft_strdup(temp);
+		ret = (int)ft_strlen(ret) <= prt->precision ? handle_int_precision(prt, temp) : ft_strdup(temp);
 		free(temp);
 	}
 	if (prt->include_plus)
