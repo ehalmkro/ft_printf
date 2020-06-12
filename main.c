@@ -36,6 +36,6 @@ void compare_printf_2(char *str, int value1, value2)
 
 int main (int argc, char **argv)
 {
-	compare_printf_2("%hho, %ho", -42, -42);
+	compare_printf_2("%x, %x", 0, UINT_MAX);
 	return(0);
 }

@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 13:41:35 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 14:02:42 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ intmax_t integer_length(t_prt *tab)
 	nb = 0;
 	if (tab->u_sign)
 	{
-		nb = tab->length == hh ? (char)va_arg(tab->ap, uintmax_t) : nb;
-		nb = tab->length == h ? (short)va_arg(tab->ap, uintmax_t) : nb;
-		nb = tab->length == ll ? (long long)va_arg(tab->ap, uintmax_t) : nb;
-		nb = tab->length == l ? (long)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == hh ? (unsigned char)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == h ? (unsigned short)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == ll ? (unsigned long long)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == l ? (unsigned long)va_arg(tab->ap, uintmax_t) : nb;
 		nb = tab->length == j ? va_arg(tab->ap, uintmax_t) : nb;
 		nb = tab->length == undef ? (unsigned int)va_arg(tab->ap, uintmax_t) : nb;
 	}
