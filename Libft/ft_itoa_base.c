@@ -5,7 +5,7 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/14 12:04:51 by ehalmkro          #+#    #+#             *//*   Updated: 2020/06/10 16:00:50 by ehalmkro         ###   ########.fr       */
+/*   Created: 2020/04/14 12:04:51 by ehalmkro          #+#    #+#             *//*   Updated: 2020/06/12 12:13:20 by ehalmkro         ###   ########.fr       */
 
 /*                                                                            */
 /* ************************************************************************** */
@@ -45,6 +45,7 @@ char *ft_itoa_base(intmax_t nb, int base)
 		return(ft_strdup("-9223372036854775808"));
 	base_chars = ft_strdup("0123456789abcdef");
 	nb = base == 16 && nb < 0 ? (unsigned int)nb : nb;
+	nb = base == 8 && nb < 0 ? (unsigned int)nb : nb;
 	char_count = return_length(nb, base);
 	ret = ft_strnew(char_count + 1);
 	ret[char_count] = '\0';

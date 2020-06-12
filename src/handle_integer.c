@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/11 16:01:10 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 12:14:24 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ char *integer_length(t_prt *prt)
 	}
 	else
 	{
-		nb = prt->length == hh ? (char) va_arg(prt->ap, int) : nb;
-		nb = prt->length == h ? (short) va_arg(prt->ap, int) : nb;
+		nb = prt->length == hh ? (char)va_arg(prt->ap, int) : nb;
+		nb = prt->length == h ? (short)va_arg(prt->ap, int) : nb;
 		nb = prt->length == ll ? va_arg(prt->ap, long long) : nb;
 		nb = prt->length == l ? va_arg(prt->ap, long) : nb;
 		nb = prt->length == j ? va_arg(prt->ap, intmax_t) : nb;

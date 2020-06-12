@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/11 15:59:48 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 12:03:54 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ static void get_length(t_prt *prt)
 	while (ft_strchr(flags, CURR_POS) != NULL && CURR_POS)
 		prt->i++;
 	free(flags);
-
 }
 
 static void reinit(t_prt *prt)
@@ -164,7 +163,7 @@ void handle_params(t_prt *prt)
 	ret = NULL;
 	i = 0;
 	prt->i++;
-	if (CURR_POS)
+	while (!ft_strchr("scSCdDiuUoOxXbp%", CURR_POS))
 	{
 		get_flags(prt);
 		get_width(prt);

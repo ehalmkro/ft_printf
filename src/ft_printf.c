@@ -76,6 +76,8 @@ static void init(t_prt *printf)
 	printf->include_dot = FALSE;
 	printf->length = undef;
 	printf->base = 10;
+	printf->flag_mask= "-+ 0#";
+	printf->length_mask = "lhjz";
 }
 int ft_printf(const char *format, ...)
 {

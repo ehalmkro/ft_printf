@@ -53,6 +53,8 @@ typedef struct		s_printf
 	e_boolean include_dot;
 	e_boolean include_zero;
 	e_boolean include_minus;
+	char *flag_mask;
+	char *length_mask;
 	char padding_char;
 	int width;
 	e_length length;
