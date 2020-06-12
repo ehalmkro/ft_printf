@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 12:14:24 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 13:41:35 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,41 +68,48 @@ char *handle_int_precision(t_prt *prt, char *value)
 	return (ret);
 }
 
-char *integer_length(t_prt *prt)
+intmax_t integer_length(t_prt *tab)
 {
-	long long nb;
+	intmax_t nb;
 
 	nb = 0;
-	if (CURR_POS == 'u')
+	if (tab->u_sign)
 	{
-		nb = prt->length == h ? (unsigned short) va_arg(prt->ap, int) : nb;
-		nb = prt->length == ll ? (unsigned long long)va_arg(prt->ap, long long) : nb;
-		nb = prt->length == l ? (unsigned long)va_arg(prt->ap, long) : nb;
-		nb = prt->length == j ? va_arg(prt->ap, uintmax_t) : nb;
+		nb = tab->length == hh ? (char)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == h ? (short)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == ll ? (long long)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == l ? (long)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == j ? va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == undef ? (unsigned int)va_arg(tab->ap, uintmax_t) : nb;
 	}
 	else
 	{
-		nb = prt->length == hh ? (char)va_arg(prt->ap, int) : nb;
-		nb = prt->length == h ? (short)va_arg(prt->ap, int) : nb;
-		nb = prt->length == ll ? va_arg(prt->ap, long long) : nb;
-		nb = prt->length == l ? va_arg(prt->ap, long) : nb;
-		nb = prt->length == j ? va_arg(prt->ap, intmax_t) : nb;
+		nb = tab->length == hh ? (char)va_arg(tab->ap, intmax_t) : nb;
+		nb = tab->length == h ? (short)va_arg(tab->ap, intmax_t) : nb;
+		nb = tab->length == ll ? (long long)va_arg(tab->ap, intmax_t) : nb;
+		nb = tab->length == l ? (long)va_arg(tab->ap, intmax_t) : nb;
+		nb = tab->length == j ? va_arg(tab->ap, intmax_t) : nb;
+		nb = tab->length == undef ? (int)va_arg(tab->ap, intmax_t) : nb;
 	}
-	return (ft_itoa_base(nb, prt->base));
+	return (nb);
 }
-char *output_int(t_prt *prt)			// TODO: REFACTOR with long long nb?
+
+char *output_int(t_prt *prt)
 {
 	char	*ret;
 	char	*temp;
 	char 	*header;
+	intmax_t nb;
 
 	header = NULL;
 	temp = NULL;
-	CURR_POS == 'o' ? prt->base = 8 : 0;
-	if (CURR_POS == 'u')
-		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, unsigned int), prt->base) : integer_length(prt);
-	else
-		ret = prt->length == undef ? ft_itoa_base(va_arg(prt->ap, int), prt->base) : integer_length(prt);
+	if (CURR_POS == 'o' || CURR_POS == 'u')
+	{
+		prt->u_sign = TRUE;
+		prt->base = CURR_POS == 'o' ? 8 : prt->base;
+	}
+	nb = integer_length(prt);
+	ret = ft_itoa_base(nb, prt->base);
 	if (prt->include_dot)
 	{
 		temp = ft_strdup(ret);
@@ -126,7 +133,7 @@ char *output_int(t_prt *prt)			// TODO: REFACTOR with long long nb?
 	prt->strlen_value = ft_strlen(ret);
 	if (prt->include_space && !prt->include_plus && ft_atoi(ret) >= 0 && !ft_strchr(ret, ' '))
 	{
-		prt->include_zero && prt->width > 0 ? --prt->width : 0;
+		prt->width > 0 ? --prt->width : 0;
 		join_value_to_output(prt, " ", 1);
 	}
 	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;

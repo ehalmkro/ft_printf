@@ -8,6 +8,7 @@
 
 void compare_printf(char *str)
 {
+	printf("SYSTEM\t");
 	int i = printf(str);
 	printf("\n");
 	int j = ft_printf(str);
@@ -35,6 +36,6 @@ void compare_printf_2(char *str, int value1, value2)
 
 int main (int argc, char **argv)
 {
-	compare_printf_2("%o, %ho", -42, -42);
+	compare_printf_2("%hho, %ho", -42, -42);
 	return(0);
 }

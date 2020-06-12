@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/11 15:53:45 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 11:30:59 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static void init(t_prt *printf)
 	printf->include_plus = FALSE;
 	printf->include_dot = FALSE;
 	printf->length = undef;
+	printf->u_sign = FALSE;
 	printf->base = 10;
 	printf->flag_mask= "-+ 0#";
 	printf->length_mask = "lhjz";

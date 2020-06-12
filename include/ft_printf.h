@@ -53,6 +53,7 @@ typedef struct		s_printf
 	e_boolean include_dot;
 	e_boolean include_zero;
 	e_boolean include_minus;
+	e_boolean u_sign;
 	char *flag_mask;
 	char *length_mask;
 	char padding_char;
@@ -98,6 +99,6 @@ void handle_params(t_prt *prt);
 
 char* 				add_width(t_prt *prt, char *ret);
 
-char 				*integer_length(t_prt *prt);
+intmax_t 	integer_length(t_prt *tab);
 
 #endif //FT_PRINTF_H

@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 12:03:54 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 13:45:51 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ static void get_length(t_prt *prt)
 		return ;
 	}
 	if (CURR_POS == 'h')
-		prt->length = prt->format[prt->i + 1] == 'h' ? hh : h;
+		prt->length = NEXT_POS == 'h' ? hh : h;
 	if (CURR_POS == 'l')
-		prt->length = prt->format[prt->i + 1] == 'l' ? ll : l;
+		prt->length = NEXT_POS == 'l' ? ll : l;
 	CURR_POS == 'j' ? prt->length = j : 0;
 	CURR_POS == 'z' ? prt->length = z : 0;
 	CURR_POS == 't' ? prt->length = t : 0;
@@ -85,6 +85,7 @@ static void reinit(t_prt *prt)
 	prt->include_plus = FALSE;
 	prt->include_dot = FALSE;
 	prt->length = undef;
+	prt->u_sign = FALSE;
 	prt->padding_char = ' ';
 	prt->base = 10;
 	prt->strlen_value = 0;
