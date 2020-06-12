@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-long long ft_round(long double nb)
+#include "libft.h"
+
+intmax_t ft_round(long double nb)
 {
 	return (nb >= 0) ? (int)(nb + 0.5) : (int)(nb - 0.5);
 }

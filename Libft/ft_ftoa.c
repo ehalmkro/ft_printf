@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:06:42 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 18:10:39 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/12 18:29:04 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ char *ft_ftoa(long double nb, int precision)
 	long double fract_part;
 	char *ret;
 	char *temp;
+	size_t i;
 
+	i = 0;
 	fract_part = ft_modf(nb, &int_part);
 	temp = ft_itoa((long long)int_part);
 	ret = ft_strdup(temp);
@@ -37,6 +39,15 @@ char *ft_ftoa(long double nb, int precision)
 	ret = ft_strdup(temp);
 	free(temp);
 	temp = output_fract_part(fract_part, precision);
+	temp = ft_strnew(precision);
+	fract_part *= 10;
+
+	while (precision--)
+	{
+		printf("%Lf\n", fract_part);
+		temp[i++] = ft_round(fract_part) + '0';
+		fract_part *= 10;
+	}
 	ret = ft_strjoin(ret, temp);
 	return(ret);
 }

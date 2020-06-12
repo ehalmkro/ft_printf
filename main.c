@@ -39,7 +39,7 @@ int main (int argc, char **argv)
 	//compare_printf_1("%f", 1.1);
 	long double nb;
 	nb = 0.50;
-	compare_printf_2("{%Lf}{%lf}", 1.42l, 1.42);
+	compare_printf_2("{%Lf}{%l.9f}", 1.42l, 1.42);
 	//ft_printf("%f\n", 1.42);
 	return(0);
 }
