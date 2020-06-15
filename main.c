@@ -39,7 +39,7 @@ int main (int argc, char **argv)
 	//compare_printf_1("%f", 1.1);
 //	compare_printf_1("%15.4d", 42);
 
-	compare_printf_1("%lld", LLONG_MIN);
+//	compare_printf_1("%lld", LLONG_MIN);
 	//compare_printf_2("%7s%-5s", "hello", "world");
 //	compare_printf_2("%*d", 5, 42);
 //	compare_printf_2("{%*d}", -5, 42);
@@ -48,9 +48,10 @@ int main (int argc, char **argv)
 //
 
 
-/*	printf("%15.4d", 424242);
+	int j = printf("%lld", LLONG_MIN);
 	printf("\n");
-	printf("%15.4d", 424242);
+	int i = ft_printf("%lld", LLONG_MIN);
+
 	//ft_printf("%s\n", ft_uintmaxtoa(6465424242242));
-	return(0);*/
+	return(0);
 }
