@@ -41,7 +41,7 @@ char			*ft_itoa(uintmax_t n)
 {
 	char		*ret;
 	long long	nb;
-	int		charcount;
+	int			charcount;
 
 	charcount = 1;
 	ret = NULL;

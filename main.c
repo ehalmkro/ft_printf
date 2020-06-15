@@ -39,7 +39,7 @@ int main (int argc, char **argv)
 	//compare_printf_1("%f", 1.1);
 //	compare_printf_1("%15.4d", 42);
 
-	compare_printf_2("{%*p}", 10, 0);
+	compare_printf_1("%lld", LLONG_MIN);
 	//compare_printf_2("%7s%-5s", "hello", "world");
 //	compare_printf_2("%*d", 5, 42);
 //	compare_printf_2("{%*d}", -5, 42);

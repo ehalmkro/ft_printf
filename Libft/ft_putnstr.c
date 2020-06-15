@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-void ft_putnstr(char *str, size_t len)
+void	ft_putnstr(char *str, size_t len)
 {
 	if (str)
 		write(1, str, len);

@@ -6,16 +6,16 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/09 15:27:46 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/09 15:28:38 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/15 15:51:20 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strupr(char *str)
+char	*ft_strupr(char *str)
 {
-	size_t i;
-	char *ret;
+	size_t	i;
+	char	*ret;
 
 	ret = ft_strnew(ft_strlen(str));
 	i = 0;
@@ -26,7 +26,5 @@ char *ft_strupr(char *str)
 	}
 	ret[i] = '\0';
 	free(str);
-	return(ret);
-
-
+	return (ret);
 }

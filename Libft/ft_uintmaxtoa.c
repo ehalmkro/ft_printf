@@ -6,13 +6,13 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 12:01:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/15 12:55:12 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/15 15:49:04 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-static size_t get_len(uintmax_t nb, int base)
+
+static size_t	get_len(uintmax_t nb, int base)
 {
 	size_t len;
 
@@ -22,14 +22,14 @@ static size_t get_len(uintmax_t nb, int base)
 		len++;
 		nb /= base;
 	}
-	return(len == 0 ? 1 : len);
+	return (len == 0 ? 1 : len);
 }
 
-char *ft_uintmaxtoa(uintmax_t nb, int base)
+char			*ft_uintmaxtoa(uintmax_t nb, int base)
 {
-	uintmax_t len;
-	char *ret;
-	char *base_chars;
+	uintmax_t	len;
+	char		*ret;
+	char		*base_chars;
 
 	base_chars = ft_strdup("0123456789abcdef");
 	len = get_len(nb, base);
@@ -42,5 +42,5 @@ char *ft_uintmaxtoa(uintmax_t nb, int base)
 		nb /= base;
 	}
 	free(base_chars);
-	return(ret);
+	return (ret);
 }

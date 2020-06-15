@@ -6,16 +6,15 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/15 11:05:43 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/15 12:45:27 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/15 15:56:28 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h> //TODO: REMOVE
 
-static size_t return_length(intmax_t nb, int base)
+static size_t	return_length(intmax_t nb, int base)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	if (nb < 0)
@@ -31,22 +30,18 @@ static size_t return_length(intmax_t nb, int base)
 	return (len);
 }
 
-char *ft_itoa_base(intmax_t nb, int base)
+char			*ft_itoa_base(intmax_t nb, int base)
 {
-	char *ret;
-	char *base_chars;
-	size_t char_count;
+	char	*ret;
+	char	*base_chars;
+	size_t	char_count;
 
 	if (nb == 0)
-		return(ft_strdup("0"));
-	if (nb == 4294967296 && base == 16)
-		return(ft_strdup("100000000"));
-	if (nb == -9223372036854775807 - 1)
-		return(ft_strdup("-9223372036854775808"));
+		return (ft_strdup("0"));
 	base_chars = ft_strdup("0123456789abcdef");
 	char_count = return_length(nb, base);
 	if ((ret = ft_strnew(char_count + 1)) == NULL)
-		return(NULL);
+		return (NULL);
 	ret[char_count] = '\0';
 	if (nb < 0)
 	{
@@ -59,5 +54,5 @@ char *ft_itoa_base(intmax_t nb, int base)
 		nb /= base;
 	}
 	free(base_chars);
-	return(ret);
+	return (ret);
 }

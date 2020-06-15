@@ -6,11 +6,11 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/12 17:05:37 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/15 11:36:37 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/15 15:51:46 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-long double ft_round(long double nb)
+long double	ft_round(long double nb)
 {
 	return (nb >= 0) ? (int)(nb + 0.5) : (int)(nb - 0.5);
 }

@@ -6,17 +6,16 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:06:42 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/15 12:23:44 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/15 15:57:36 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>							//TODO: remove this
 
-char *output_fract_part(long double nb, int precision) // TODO: REFACTOR TO OUTPUT THE RIGHT AMOUNT OF ZEROS
+char	*output_fract_part(long double nb, int precision)
 {
-	char *ret;
-	long double factor;
+	char		*ret;
+	long double	factor;
 
 	factor = ft_powl(10, precision);
 	nb *= factor;
@@ -35,12 +34,12 @@ char *output_fract_part(long double nb, int precision) // TODO: REFACTOR TO OUTP
 	return (ret);
 }
 
-char *ft_ftoa(long double nb, int precision)
+char	*ft_ftoa(long double nb, int precision)
 {
-	long double int_part;
-	long double fract_part;
-	char *ret;
-	char *temp;
+	long double	int_part;
+	long double	fract_part;
+	char		*ret;
+	char		*temp;
 
 	fract_part = ft_modf(nb, &int_part);
 	fract_part = fract_part < 0 ? -fract_part : fract_part;
@@ -52,5 +51,5 @@ char *ft_ftoa(long double nb, int precision)
 	free(temp);
 	temp = output_fract_part(fract_part, precision);
 	ret = ft_strjoin(ret, temp);
-	return(ret);
+	return (ret);
 }
