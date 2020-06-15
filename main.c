@@ -16,7 +16,7 @@ void compare_printf(char *str)
 	printf("SYS %i\tOWN %i\n\n", i, j);
 }
 
-void compare_printf_1(char *str, float value1)
+void compare_printf_1(char *str, int value1)
 {
 	int i = printf(str, value1);
 	printf("\n");
@@ -25,7 +25,7 @@ void compare_printf_1(char *str, float value1)
 	printf("SYS %i\tOWN %i\n\n", i, j);
 }
 
-void compare_printf_2(char *str, float value1, float value2)
+void compare_printf_2(char *str, char *value1, char* value2)
 {
 	int i = printf(str, value1, value2);
 	printf("\n");
@@ -37,9 +37,10 @@ void compare_printf_2(char *str, float value1, float value2)
 int main (int argc, char **argv)
 {
 	//compare_printf_1("%f", 1.1);
-	long double nb;
-	nb = 0.50;
-	compare_printf_2("{%Lf}{%l.9f}", 1.42l, 1.42);
-	//ft_printf("%f\n", 1.42);
+	compare_printf_1("%3x", 0);
+/*	printf("%15.4d", 42);
+	printf("\n");
+	printf("%15.4d", 42);*/
+	//ft_printf("%s\n", ft_uintmaxtoa(6465424242242));
 	return(0);
 }

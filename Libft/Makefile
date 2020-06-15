@@ -6,7 +6,7 @@
 #    By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 16:11:19 by ehalmkro          #+#    #+#              #
-#    Updated: 2020/06/03 16:42:26 by ehalmkro         ###   ########.fr        #
+#    Updated: 2020/06/15 11:14:34 by ehalmkro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ ft_strmapi.c ft_lstnew.c ft_lstdelone.c ft_lstadd.c ft_lstiter.c\
 ft_lstdel.c ft_lstmap.c ft_swap.c ft_wordcount.c ft_wordlength.c\
 ft_count_if.c ft_strsplit.c ft_lstaddback.c get_next_line.c\
 ft_fswap.c ft_strndup.c ft_itoa_base.c ft_ftoa.c ft_modf.c\
-ft_putnstr.c ft_strupr.c ft_round.c ft_powl.c
+ft_putnstr.c ft_strupr.c ft_round.c ft_powl.c ft_uintmaxtoa.c\
+
 
 OBJECTS = $(subst .c,.o, $(SRC))
 FLAGS = -Wall -Werror -Wextra

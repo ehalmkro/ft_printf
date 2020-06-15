@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 14:29:54 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/15 11:13:09 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/15 11:36:37 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,11 @@ int				ft_count_if(char **tab, int (*f)(char*));
 int 				get_next_line(const int fd, char **line);
 
 long double 		ft_modf(long double x, long double *integer);
-intmax_t 			ft_round(long double nb);
+long double 		ft_round(long double nb);
 
 char 				*ft_strupr(char *str);
 long double 		ft_powl(long double x, long double y);
+char 				*ft_uintmaxtoa(uintmax_t nb, int base);
 
 
 

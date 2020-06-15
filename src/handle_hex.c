@@ -41,12 +41,12 @@ char *output_hex(t_prt *prt) // TODO: NEGATIVE HEX VALUES ARE LONG INT - VALUE
 	char *ret;
 	int padding_count;
 	char *temp;
-	intmax_t nb;
+	uintmax_t nb;
 
 	prt->base = 16;
 	prt->u_sign = TRUE;
 	nb = get_integer_length(prt);
-	ret = ft_itoa_base(nb, prt->base);
+	ret = ft_uintmaxtoa(nb, prt->base);
 	padding_count = prt->width - ft_strlen(ret);
 	if (prt->include_dot == TRUE)
 	{

@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 16:30:23 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/15 12:39:03 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ char *output_int(t_prt *prt)
 	}
 	prt->include_zero = prt->include_dot && prt->include_zero ? FALSE : prt->include_zero;
 	nb = get_integer_length(prt);
-	ret = ft_itoa_base(nb, prt->base);
+	ret = CURR_POS == 'u' || CURR_POS == 'o' ? ft_uintmaxtoa(nb, prt->base) : ft_itoa_base(nb, prt->base);
 	if (prt->include_dot)
 	{
 		temp = ft_strdup(ret);

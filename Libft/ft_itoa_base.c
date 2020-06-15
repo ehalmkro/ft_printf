@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                      :+:      :+:    :+:   */
+/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/14 12:04:51 by ehalmkro          #+#    #+#             *//*   Updated: 2020/06/12 17:00:29 by ehalmkro         ###   ########.fr       */
-
+/*   Created: 2020/06/15 11:05:43 by ehalmkro          #+#    #+#             */
+/*   Updated: 2020/06/15 12:45:27 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h> //TODO: REMOVE
 
-static size_t return_length(long long nb, int base)
+static size_t return_length(intmax_t nb, int base)
 {
 	size_t len;
 
@@ -45,7 +45,8 @@ char *ft_itoa_base(intmax_t nb, int base)
 		return(ft_strdup("-9223372036854775808"));
 	base_chars = ft_strdup("0123456789abcdef");
 	char_count = return_length(nb, base);
-	ret = ft_strnew(char_count + 1);
+	if ((ret = ft_strnew(char_count + 1)) == NULL)
+		return(NULL);
 	ret[char_count] = '\0';
 	if (nb < 0)
 	{
