@@ -25,26 +25,6 @@ static size_t get_len(uintmax_t nb, int base)
 	return(len == 0 ? 1 : len);
 }
 
-/* TODO: REMOVE THIS
-	char *ft_uintmaxtoa(uintmax_t nb)
-	{
-		uintmax_t len;
-		char *ret;
-
-		len = get_len(nb);
-		if (!(ret = ft_strnew(len)))
-			return (NULL);
-		ret[len] = '\0';
-		while (len-- > 0)
-		{
-			ret[len] = nb % 10 + '0';
-			nb /= 10;
-		}
-		return(ret);
-}
-*/
-
-
 char *ft_uintmaxtoa(uintmax_t nb, int base)
 {
 	uintmax_t len;

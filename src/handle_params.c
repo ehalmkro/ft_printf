@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 17:46:46 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/15 15:22:57 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ static int get_precision(t_prt *prt)
 			: (size_t)ft_atoi(prt->format + prt->i);
 	while (ft_isdigit(CURR_POS) || CURR_POS == '*')
 		prt->i++;
+	prt->include_dot = prt->precision < 0 ? FALSE : prt->include_dot;
+	prt->precision = prt->precision < 0 ? 0 : prt->precision;
+
 	return(0);
 }
 
@@ -142,8 +145,13 @@ static int get_width(t_prt *prt)
 	{
 		if (CURR_POS == '*')
 		{
-			prt->width = (size_t)va_arg(prt->ap, int) + 1;
+			prt->width = (size_t)va_arg(prt->ap, int);
 			prt->i++;
+			if (prt->width < 0)
+			{
+				prt->width = -prt->width;
+				prt->include_minus = TRUE;
+			}
 		}
 		if (ft_isdigit(CURR_POS))
 		{

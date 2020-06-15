@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/12 16:28:19 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/06/15 14:47:41 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ char *add_width(t_prt *prt, char *ret)
 		join_values(padding, i, ret, prt->strlen_value);
 	prt->include_minus ? ft_memmove(ret, temp, padding_count + prt->strlen_value + 1) : ft_memmove(ret, temp, i + prt->strlen_value + 1);
 	prt->strlen_value = prt->include_minus ? prt->strlen_value + padding_count : prt->strlen_value + i;
-//	free(temp);
-//	free(padding);
+/*	free(temp);
+	free(padding);*/
 	return(ret);
 }
 char *join_values(char *dst, size_t dst_len, char *src, size_t src_len)
