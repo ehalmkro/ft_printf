@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/27 15:43:03 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/27 16:09:31 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static int	copy_format(t_prt *prt)
 {
 	char	*str;
 	char	*temp;
-	char 	*temp2;
 	size_t	i;
 
 	i = 0;
