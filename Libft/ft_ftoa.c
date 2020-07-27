@@ -6,50 +6,52 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:06:42 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/15 15:57:36 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/27 11:35:55 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*output_fract_part(long double nb, int precision)
+static long double	rounding(long double nb, int precision)
 {
-	char		*ret;
-	long double	factor;
+	long double	rounding;
+	int i;
 
-	factor = ft_powl(10, precision);
-	nb *= factor;
-	nb = ft_round(nb);
-	if (nb == 0)
+	rounding = 0.5;
+	if (nb < 0)
+		rounding *= -1;
+	i = 0;
+	while (precision-- > 0)
+		rounding /= 10.0;
+	return (rounding);
+}
+
+char				*ft_ftoa(long double nb, int precision)
+{
+	unsigned long long	dec;
+	char				*ipart;
+	char				*fpart;
+	char				*ret;
+	int					i;
+
+	nb = nb + rounding(nb, precision);
+	nb *= (nb < 0) ? -1 : 1;
+	dec = nb;
+	ipart = ft_itoa(dec);
+	nb = precision ? (nb - dec) : 0;
+	fpart = ft_strnew(precision + 2);
+	fpart[0] = '.';
+	i = 1;
+	while (precision-- > 0)
 	{
-		ret = ft_strnew(precision);
-		while (precision)
-		{
-			ret[--precision] = nb + '0';
-			nb /= 10;
-		}
+		nb *= 10;
+		dec = nb;
+		nb -= dec;
+		fpart[i++] = dec + '0';
 	}
-	else
-		ret = ft_uintmaxtoa(nb, 10);
+	ret = ft_strjoin(ipart, fpart);
+	free(fpart);
+	free(ipart);
 	return (ret);
 }
 
-char	*ft_ftoa(long double nb, int precision)
-{
-	long double	int_part;
-	long double	fract_part;
-	char		*ret;
-	char		*temp;
-
-	fract_part = ft_modf(nb, &int_part);
-	fract_part = fract_part < 0 ? -fract_part : fract_part;
-	temp = ft_itoa_base(int_part, 10);
-	ret = ft_strdup(temp);
-	free(temp);
-	temp = ft_strjoin(ret, ".");
-	ret = ft_strdup(temp);
-	free(temp);
-	temp = output_fract_part(fract_part, precision);
-	ret = ft_strjoin(ret, temp);
-	return (ret);
-}
