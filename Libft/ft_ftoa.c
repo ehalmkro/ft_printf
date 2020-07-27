@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:06:42 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/27 11:35:55 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/27 13:32:38 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ char				*ft_ftoa(long double nb, int precision)
 	int					i;
 
 	nb = nb + rounding(nb, precision);
-	nb *= (nb < 0) ? -1 : 1;
 	dec = nb;
+	nb *= (nb < 0) ? -1 : 1;
 	ipart = ft_itoa(dec);
+	dec = nb;
 	nb = precision ? (nb - dec) : 0;
 	fpart = ft_strnew(precision + 2);
 	fpart[0] = '.';

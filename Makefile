@@ -13,7 +13,7 @@
 NAME = libftprintf.a
 SRC_DIR = src/
 SRC_FILES = ft_printf.c handle_integer.c handle_params.c output.c handle_hex.c \
-            handle_string.c handle_char.c handle_float.c handle_pointer.c
+            handle_string.c handle_char.c handle_float.c handle_pointer.c get_spec.c
 INCLUDES = include/
 SOURCES = $(addprefix $(SRC_DIR), $(SRC_FILES))
 LIB = Libft/
