@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/27 16:09:31 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/28 16:39:12 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,21 @@
 static int	copy_format(t_prt *prt)
 {
 	char	*str;
-	char	*temp;
 	size_t	i;
 
 	i = 0;
-	temp = ft_strnew(prt->strlen_output);
-	ft_memmove(temp, prt->output, prt->strlen_output);
-	str = ft_strnew(prt->i - prt->prev_i);
+	str = (char*)malloc(sizeof(char) * prt->i - prt->prev_i);
 	while (prt->prev_i <= prt->i)
 	{
 		str[i] = prt->format[prt->prev_i];
 		i++;
 		prt->prev_i++;
 	}
-	str = join_values(temp, prt->strlen_output, str, i);
 	if (!CURR_POS)
 		i--;
-	prt->strlen_output += i;
-	free(prt->output);
-	prt->output = (char*)malloc(sizeof(char) * prt->strlen_output);
-	ft_memmove(prt->output, str, prt->strlen_output);
+	join_value_to_output(prt, str, i);
+	free(str);
+
 	return (0);
 }
 
