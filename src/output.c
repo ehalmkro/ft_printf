@@ -6,13 +6,13 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 15:41:16 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 17:21:29 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-char	*add_width(t_prt *prt, char *ret)
+char		*add_width(t_prt *prt, char *ret)
 {
 	int		i;
 	int		pad_n;
@@ -30,19 +30,24 @@ char	*add_width(t_prt *prt, char *ret)
 		padding[i++] = prt->padding_char;
 	if ((CURR_POS == 'X' || CURR_POS == 'x') && prt->incl_hash == TRUE)
 		hex_width(prt, &ret, &padding, &pad_n);
-	if ((CURR_POS == 'd' || CURR_POS == 'i') && (prt->incl_plus || ft_atoi(ret) < 0) && prt->incl_zero && !prt->incl_minus)
+	if ((CURR_POS == 'd' || CURR_POS == 'i') && (prt->incl_plus
+		|| ft_atoi(ret) < 0) && prt->incl_zero && !prt->incl_minus)
 		switch_width(&ret, &padding);
-	temp = prt->incl_minus ? join_values(ret, prt->strlen_value, padding, pad_n) : join_values(padding, i, ret, prt->strlen_value);
+	temp = prt->incl_minus ? join_values(ret, prt->strlen_value, padding, pad_n)
+			: join_values(padding, i, ret, prt->strlen_value);
 	free(ret);
-	ret = prt->incl_minus ? (char*)malloc(sizeof(char) * (pad_n + prt->strlen_value)) : (char*)malloc(sizeof(char) * (i + prt->strlen_value));
-	prt->incl_minus ? ft_memmove(ret, temp, pad_n + prt->strlen_value) : ft_memmove(ret, temp, i + prt->strlen_value);
-	prt->strlen_value = prt->incl_minus ? prt->strlen_value + pad_n : prt->strlen_value + i;
+	ret = prt->incl_minus ? (char*)malloc(sizeof(char) * (pad_n +
+		prt->strlen_value)) : (char*)malloc(sizeof(char) * (i + prt->strlen_value));
+	prt->incl_minus ? ft_memmove(ret, temp, pad_n + prt->strlen_value) :
+	ft_memmove(ret, temp, i + prt->strlen_value);
+	prt->strlen_value = prt->incl_minus ? prt->strlen_value + pad_n :
+		prt->strlen_value + i;
 	free(temp);
 	free(padding);
 	return (ret);
 }
 
-char	*join_values(char *dst, size_t dst_len, char *src, size_t src_len)
+char		*join_values(char *dst, size_t dst_len, char *src, size_t src_len)
 {
 	char	*ret;
 
@@ -52,7 +57,7 @@ char	*join_values(char *dst, size_t dst_len, char *src, size_t src_len)
 	return (ret);
 }
 
-void	join_value_to_output(t_prt *ptr, char *value, size_t len)
+void		join_value_to_output(t_prt *ptr, char *value, size_t len)
 {
 	char	*ret;
 

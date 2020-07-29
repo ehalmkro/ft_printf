@@ -28,8 +28,8 @@ char		*output_float(t_prt *prt)
 	long double		nb;
 
 	nb = get_float_length(prt);
-	prt->precision = prt->precision == 0 ? 6 : prt->precision;
-	ret = ft_ftoa(nb, prt->precision);
+	prt->prec = prt->prec == 0 ? 6 : prt->prec;
+	ret = ft_ftoa(nb, prt->prec);
 	prt->strlen_value = ft_strlen(ret);
 	return (ret);
 }

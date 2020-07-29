@@ -6,13 +6,13 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 11:23:56 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 18:25:39 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void			switch_width(char **ret, char **padding)
+void		switch_width(char **ret, char **padding)
 {
 	char		temp;
 
@@ -23,51 +23,37 @@ void			switch_width(char **ret, char **padding)
 	(*padding)[0] = temp;
 }
 
-static char *handle_int_width(t_prt *prt, char *ret)
-{
-	if (prt->precision >= prt->width)
-		return (ret);
-	else
-	{
-		ret = add_width(prt, ret);
-		return (ret);
-
-	}
-}
-
-char			*handle_int_precision(t_prt *prt, char *value)
+char		*handle_int_precision(t_prt *prt, char *value)
 {
 	int			len;
 	char		*ret;
 	char		*padding;
 	int			i;
+	int			j;
 
 	i = 0;
-	len = prt->precision - ft_strlen(value);
+	j = 0;
+	len = prt->prec - ft_strlen(value);
 	if (len < 0)
 		return (value);
 	padding = ft_strnew(len + 1);
-	if (value[0] == '-')
+	if (value[j] == '-')
 	{
-		padding[i] = '-';
-		i++;
-		value++;
+		padding[i++] = '-';
+		j++;
 		len++;
 	}
-	while (len > 0)
-	{
-		padding[i] = '0';
-		i++;
-		len--;
-	}
+	while (len-- > 0)
+		padding[i++] = '0';
 	padding[i] = '\0';
-	ret = ft_strjoin(padding, value);
+	ret = ft_strjoin(padding, value + j);
+	free(value);
 	prt->strlen_value = ft_strlen(ret);
 	free(padding);
 	return (ret);
 }
 
-intmax_t		get_integer_length(t_prt *tab)
+intmax_t	get_integer_length(t_prt *tab)
 {
 	intmax_t	nb;
 
@@ -76,10 +62,12 @@ intmax_t		get_integer_length(t_prt *tab)
 	{
 		nb = tab->length == hh ? (unsigned char)va_arg(tab->ap, uintmax_t) : nb;
 		nb = tab->length == h ? (unsigned short)va_arg(tab->ap, uintmax_t) : nb;
-		nb = tab->length == ll ? (unsigned long long)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == ll ? (unsigned long long)va_arg(tab->ap, uintmax_t)
+			: nb;
 		nb = tab->length == l ? (unsigned long)va_arg(tab->ap, uintmax_t) : nb;
 		nb = tab->length == j ? va_arg(tab->ap, uintmax_t) : nb;
-		nb = tab->length == undef ? (unsigned int)va_arg(tab->ap, uintmax_t) : nb;
+		nb = tab->length == undef ? (unsigned int)va_arg(tab->ap, uintmax_t)
+			: nb;
 	}
 	else
 	{
@@ -93,7 +81,7 @@ intmax_t		get_integer_length(t_prt *tab)
 	return (nb);
 }
 
-char			*output_int(t_prt *prt)
+char		*output_int(t_prt *prt)
 {
 	char			*ret;
 	char			*temp;
@@ -108,14 +96,9 @@ char			*output_int(t_prt *prt)
 	}
 	prt->incl_zero = prt->incl_dot && prt->incl_zero ? FALSE : prt->incl_zero;
 	nb = get_integer_length(prt);
-	ret = prt->u_sign ? ft_uintmaxtoa(nb, prt->base) : ft_itoa_base(nb, prt->base);
-	if (prt->incl_dot)
-	{
-		temp = ft_strdup(ret);
-		free(ret);
-		ret = (int)ft_strlen(ret) <= prt->precision ? handle_int_precision(prt, temp) : ft_strdup(temp);
-		free(temp);
-	}
+	ret = prt->u_sign  ? ft_uintmaxtoa(nb, prt->base) : ft_itoa_base(nb, prt->base);
+	if (prt->incl_dot && (int)ft_strlen(ret) <= prt->prec)
+		ret = handle_int_precision(prt, ret);
 	if (prt->incl_plus)
 		header = ft_strdup("+");
 	else if (prt->incl_hash && CURR_POS == 'o' && (ft_atoi(ret) != 0 && ret[0] != '0'))
@@ -130,7 +113,7 @@ char			*output_int(t_prt *prt)
 		ret = ft_strdup(temp);
 		free(temp);
 	}
-	if (prt->incl_dot == TRUE && prt->precision == 0 && ft_atoi(ret) == 0 && !prt->incl_hash)
+	if (prt->incl_dot == TRUE && prt->prec == 0 && ft_atoi(ret) == 0 && !prt->incl_hash)
 	{
 		free(ret);
 		ret = ft_strdup("");
@@ -141,7 +124,7 @@ char			*output_int(t_prt *prt)
 		prt->width > 0 ? --prt->width : 0;
 		join_value_to_output(prt, " ", 1);
 	}
-	ret = prt->width > 0 ? handle_int_width(prt, ret) : ret;
+	ret = prt->width > 0 && prt->prec < prt->width ? add_width(prt, ret) : ret;
 	free(header);
 	return (ret);
 }

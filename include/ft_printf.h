@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 13:08:36 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/28 17:34:21 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:56:35 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ typedef struct	s_printf
 	char		*output;
 	va_list		ap;
 
-	int			precision;
+	int			prec;
 	size_t		i;
 	size_t		prev_i;
 	size_t		base;

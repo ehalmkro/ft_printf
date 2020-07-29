@@ -59,7 +59,7 @@ static void	init(t_prt *printf)
 	printf->i = 0;
 	printf->prev_i = 0;
 	printf->width = 0;
-	printf->precision = 0;
+	printf->prec = 0;
 	printf->strlen_output = 0;
 	printf->strlen_value = 0;
 	printf->output = (char*)malloc(sizeof(char));

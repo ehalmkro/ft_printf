@@ -22,7 +22,7 @@ char	*output_string(t_prt *prt)
 	prt->strlen_value = ft_strlen(ret);
 	if (prt->incl_dot)
 	{
-		ret = ft_strndup(ret, prt->precision);
+		ret = ft_strndup(ret, prt->prec);
 		prt->strlen_value = ft_strlen(ret);
 	}
 	ret = prt->width > prt->strlen_value ? add_width(prt, ret) : ret;

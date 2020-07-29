@@ -46,10 +46,10 @@ int main (int argc, char **argv)
 //	compare_printf_2("{%*c}", -15, 0);
 //	compare_printf_2("%0*i", -7, -54);
 //
-	for (int i = 0; i < 2500; i++){
-	int j = printf("%15.4d", 42);
+	for (int i = 0; i < 9999; i++){
+	int j = printf("%.6d", -3);
 	printf("\n");
-	int g = ft_printf("%15.4d", 42);
+	int g = ft_printf("%.6d", -3);;
 		printf("\n");
 
 	printf("\n");

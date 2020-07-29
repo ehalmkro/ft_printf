@@ -37,12 +37,12 @@ void		get_precision(t_prt *prt)
 		return ;
 	prt->incl_dot = TRUE;
 	prt->i++;
-	prt->precision = CURR_POS == '*' ? (size_t)va_arg(prt->ap, int)
-									: (size_t)ft_atoi(prt->format + prt->i);
+	prt->prec = CURR_POS == '*' ? (size_t)va_arg(prt->ap, int)
+								: (size_t)ft_atoi(prt->format + prt->i);
 	while (ft_isdigit(CURR_POS) || CURR_POS == '*')
 		prt->i++;
-	prt->incl_dot = prt->precision < 0 ? FALSE : prt->incl_dot;
-	prt->precision = prt->precision < 0 ? 0 : prt->precision;
+	prt->incl_dot = prt->prec < 0 ? FALSE : prt->incl_dot;
+	prt->prec = prt->prec < 0 ? 0 : prt->prec;
 }
 
 void		get_flags(t_prt *prt)

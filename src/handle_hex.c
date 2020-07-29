@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 20:15:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 16:38:10 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 17:06:12 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		hex_width(t_prt *prt, char **ret, char **pad, int *pad_count)
 	}
 }
 
-static char *add_hash(t_prt *prt, char *ret)
+static char	*add_hash(t_prt *prt, char *ret)
 {
 	char *temp;
 	char *hex_hash;
@@ -47,7 +47,7 @@ static char *add_hash(t_prt *prt, char *ret)
 	free(temp);
 	free(hex_hash);
 	prt->incl_hash = FALSE;
-	return(ret);
+	return (ret);
 }
 
 char		*output_hex(t_prt *prt)
@@ -63,7 +63,7 @@ char		*output_hex(t_prt *prt)
 	padding_count = prt->width - ft_strlen(ret);
 	if (prt->incl_dot == TRUE)
 	{
-		if (prt->precision == 0)
+		if (prt->prec == 0)
 			ret = ft_strdup("");
 		else
 			ret = handle_int_precision(prt, ret);
