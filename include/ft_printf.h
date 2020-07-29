@@ -15,6 +15,7 @@
 
 # define CURR_POS prt->format[prt->i]
 # define NEXT_POS prt->format[prt->i + 1]
+# define PREV_POS prt->format[prt->i - 1]
 
 # include <stdio.h>						// TODO: REMOVE THIS
 # include <string.h>						// TODO: REMOVE THIS

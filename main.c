@@ -46,11 +46,17 @@ int main (int argc, char **argv)
 //	compare_printf_2("{%*c}", -15, 0);
 //	compare_printf_2("%0*i", -7, -54);
 //
-
-
-	int j = printf("%lld", LLONG_MIN);
+	for (int i = 0; i < 2500; i++){
+	int j = printf("%15.4d", 42);
 	printf("\n");
-	int i = ft_printf("%lld", LLONG_MIN);
+	int g = ft_printf("%15.4d", 42);
+		printf("\n");
+
+	printf("\n");
+		printf("%i %i\n", g, j);
+	}
+
+//while(1);
 
 	//ft_printf("%s\n", ft_uintmaxtoa(6465424242242));
 	return(0);

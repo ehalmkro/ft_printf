@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 14:50:18 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 16:29:05 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void		handle_params(t_prt *prt)
 	{
 		if (CURR_POS == g_convert_tab[i].specifier)
 		{
-		//	printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %i\nINCLUDE DOT \t %i\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\nLENGTH \t\t%i\n",
-		//	prt->padding_char, prt->width, prt->precision, prt->incl_dot, prt->incl_hash, prt->incl_space, prt->incl_plus, CURR_POS, prt->length);
+			//printf("WIDTH \t\t '%c' %lu\nPRECISION \t\t %i\nINCLUDE DOT \t %i\nINCLUDE HASH\t %i\nINCLUDE SPACE \t %i\nINCLUDE PLUS \t %i\nSPECIFIER \t\t %c\nLENGTH \t\t%i\n",
+			//prt->padding_char, prt->width, prt->precision, prt->incl_dot, prt->incl_hash, prt->incl_space, prt->incl_plus, CURR_POS, prt->length);
 			ret = g_convert_tab[i].f(prt);
 			join_value_to_output(prt, ret, prt->strlen_value);
 			free(ret);

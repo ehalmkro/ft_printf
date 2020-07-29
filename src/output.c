@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 15:01:12 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:41:16 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ void	join_value_to_output(t_prt *ptr, char *value, size_t len)
 	ret = join_values(ptr->output, ptr->strlen_output, value, len);
 	ptr->strlen_output += len;
 	free(ptr->output);
-	ptr->output = ret;
+	ptr->output = (char*)malloc(sizeof(char) * ptr->strlen_output);
+	ptr->output = ft_memcpy(ptr->output, ret, ptr->strlen_output);
+	free(ret);
 }
