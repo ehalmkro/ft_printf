@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 11:16:43 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 15:01:12 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ char	*add_width(t_prt *prt, char *ret)
 	if ((CURR_POS == 'd' || CURR_POS == 'i') && (prt->incl_plus || ft_atoi(ret) < 0) && prt->incl_zero && !prt->incl_minus)
 		switch_width(&ret, &padding);
 	temp = prt->incl_minus ? join_values(ret, prt->strlen_value, padding, pad_n) : join_values(padding, i, ret, prt->strlen_value);
-	prt->incl_minus ? ft_memmove(ret, temp, pad_n + prt->strlen_value + 1) : ft_memmove(ret, temp, i + prt->strlen_value + 1);
+	free(ret);
+	ret = prt->incl_minus ? (char*)malloc(sizeof(char) * (pad_n + prt->strlen_value)) : (char*)malloc(sizeof(char) * (i + prt->strlen_value));
+	prt->incl_minus ? ft_memmove(ret, temp, pad_n + prt->strlen_value) : ft_memmove(ret, temp, i + prt->strlen_value);
 	prt->strlen_value = prt->incl_minus ? prt->strlen_value + pad_n : prt->strlen_value + i;
 	free(temp);
 	free(padding);
