@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 20:15:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/27 15:21:24 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 10:46:28 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ char	*output_hex(t_prt *prt)
 	{
 		temp = ft_strjoin("0x", ret);
 		prt->incl_hash = FALSE;
-		//free(ret);
+		free(ret);
 		ret = ft_strdup(temp);
-		//free(temp);
+		free(temp);
 	}
 	ret = CURR_POS == 'X' ? ft_strupr(ret) : ret;
 	prt->strlen_value = ft_strlen(ret);

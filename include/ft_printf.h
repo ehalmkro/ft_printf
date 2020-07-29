@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 13:08:36 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/27 13:20:41 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/28 17:34:21 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ typedef struct	s_printf
 	t_boolean	incl_zero;
 	t_boolean	incl_minus;
 	t_boolean	u_sign;
-	char		*flag_mask;
-	char		*length_mask;
 	char		padding_char;
 	int			width;
 	t_length	length;

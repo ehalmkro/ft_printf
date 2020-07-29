@@ -6,11 +6,13 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/27 15:20:30 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 11:14:18 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+
+char *g_identifiers = "scSCdDiuUoOxXpfF%";
 
 t_convert	g_convert_tab[] =
 {
@@ -37,7 +39,7 @@ char		*n_format(t_prt *prt)
 	ret = (int)ft_strlen(prt->output);
 	arg = va_arg(prt->ap, int*);
 	*arg = ret;
-	return ("");
+	return (ft_strdup(""));
 }
 
 char		*percent_format(t_prt *prt)
@@ -75,7 +77,7 @@ void		handle_params(t_prt *prt)
 	ret = NULL;
 	i = 0;
 	prt->i++;
-	while (!ft_strchr("scSCdDiuUoOxXpfF%", CURR_POS) && CURR_POS)
+	while (!ft_strchr(g_identifiers, CURR_POS) && CURR_POS)
 	{
 		get_flags(prt);
 		get_width(prt);
@@ -90,6 +92,7 @@ void		handle_params(t_prt *prt)
 		//	prt->padding_char, prt->width, prt->precision, prt->incl_dot, prt->incl_hash, prt->incl_space, prt->incl_plus, CURR_POS, prt->length);
 			ret = g_convert_tab[i].f(prt);
 			join_value_to_output(prt, ret, prt->strlen_value);
+			free(ret);
 		}
 		i++;
 	}

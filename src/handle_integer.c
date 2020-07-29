@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/27 12:21:04 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 11:23:56 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static char *handle_int_width(t_prt *prt, char *ret)
 	{
 		ret = add_width(prt, ret);
 		return (ret);
+
 	}
 }
 
@@ -122,7 +123,13 @@ char			*output_int(t_prt *prt)
 		header = ft_strdup("0");
 		prt->width += 2;
 	}
-	ret = header != NULL && (ft_atoi(ret) >= 0 && (prt->incl_plus || prt->incl_hash)) ? ft_strjoin(header, ret) : ret;
+	if (header != NULL && (ft_atoi(ret) >= 0 && (prt->incl_plus || prt->incl_hash)))
+	{
+		temp = ft_strjoin(header, ret);
+		free(ret);
+		ret = ft_strdup(temp);
+		free(temp);
+	}
 	if (prt->incl_dot == TRUE && prt->precision == 0 && ft_atoi(ret) == 0 && !prt->incl_hash)
 	{
 		free(ret);

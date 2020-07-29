@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/28 16:39:12 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 10:56:55 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int	copy_format(t_prt *prt)
 		i--;
 	join_value_to_output(prt, str, i);
 	free(str);
-
 	return (0);
 }
 
@@ -70,13 +69,12 @@ static void	init(t_prt *printf)
 	printf->length = undef;
 	printf->u_sign = FALSE;
 	printf->base = 10;
-	printf->flag_mask = "-+ 0#";
-	printf->length_mask = "lhjz";
 }
 
 int			ft_printf(const char *format, ...)
 {
 	t_prt	*prt;
+	int		ret;
 
 	prt = (t_prt*)malloc(sizeof(t_prt));
 	if (format)
@@ -87,6 +85,8 @@ int			ft_printf(const char *format, ...)
 		parse_format(prt);
 	}
 	ft_putnstr(prt->output, prt->strlen_output);
+	free(prt->output);
+	ret = prt->strlen_output;
 	free(prt);
-	return (prt->strlen_output);
+	return (ret);
 }

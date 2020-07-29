@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/28 16:39:46 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/29 11:16:43 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ char	*add_width(t_prt *prt, char *ret)
 	temp = prt->incl_minus ? join_values(ret, prt->strlen_value, padding, pad_n) : join_values(padding, i, ret, prt->strlen_value);
 	prt->incl_minus ? ft_memmove(ret, temp, pad_n + prt->strlen_value + 1) : ft_memmove(ret, temp, i + prt->strlen_value + 1);
 	prt->strlen_value = prt->incl_minus ? prt->strlen_value + pad_n : prt->strlen_value + i;
+	free(temp);
+	free(padding);
 	return (ret);
 }
 
@@ -43,8 +45,8 @@ char	*join_values(char *dst, size_t dst_len, char *src, size_t src_len)
 	char	*ret;
 
 	ret = (char*)malloc(sizeof(char) * dst_len + src_len);
-	ft_memmove(ret, dst, dst_len);
-	ft_memmove(ret + dst_len, src, src_len);
+	ft_memcpy(ret, dst, dst_len);
+	ft_memcpy(ret + dst_len, src, src_len);
 	return (ret);
 }
 
@@ -57,7 +59,5 @@ void	join_value_to_output(t_prt *ptr, char *value, size_t len)
 	ret = join_values(ptr->output, ptr->strlen_output, value, len);
 	ptr->strlen_output += len;
 	free(ptr->output);
-	ptr->output = ft_strnew(ptr->strlen_output);
-	ft_memcpy(ptr->output, ret, ptr->strlen_output);
-	//free(ret);
+	ptr->output = ret;
 }
