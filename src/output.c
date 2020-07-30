@@ -6,11 +6,20 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 17:21:29 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/30 12:07:41 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+
+static void	get_pad_char(t_prt *prt, char *ret)
+{
+	if (CURR_POS == 'f' || CURR_POS == 'o')
+		return ;
+	prt->padding_char = prt->padding_char == '0' && (ret[0] != '0'
+	|| ft_atoi(ret) == 0) && !prt->incl_dot ? '0' : ' ';
+}
+
 
 char		*add_width(t_prt *prt, char *ret)
 {
@@ -20,8 +29,8 @@ char		*add_width(t_prt *prt, char *ret)
 	char	*temp;
 
 	i = 0;
-	prt->padding_char = prt->padding_char == '0'
-		&& (ret[0] != '0' || ft_atoi(ret) == 0) && !prt->incl_dot ? '0' : ' ';
+
+	get_pad_char(prt, ret);
 	if ((pad_n = prt->width - prt->strlen_value) < 0)
 		return (ret);
 	pad_n = prt->incl_hash && CURR_POS != 'X' && CURR_POS != 'x' ? pad_n - 2 : pad_n;

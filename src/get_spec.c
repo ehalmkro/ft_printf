@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 11:50:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/27 13:02:41 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/30 11:40:58 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		get_flags(t_prt *prt)
 		prt->i++;
 	}
 	prt->padding_char = prt->incl_zero && !prt->incl_minus ? '0' : ' ';
+
 }
 
 void		get_width(t_prt *prt)

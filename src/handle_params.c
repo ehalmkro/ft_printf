@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 17:09:45 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/30 11:41:46 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,18 @@ char		*percent_format(t_prt *prt)
 
 static void	reinit(t_prt *prt)
 {
-	prt->width = 0;
 	prt->prec = 0;
+	prt->width = 0;
+	prt->base = 10;
 	prt->incl_space = FALSE;
 	prt->incl_hash = FALSE;
 	prt->incl_plus = FALSE;
 	prt->incl_dot = FALSE;
-	prt->length = undef;
+	prt->incl_zero = FALSE;
+	prt->incl_minus = FALSE;
 	prt->u_sign = FALSE;
 	prt->padding_char = ' ';
-	prt->base = 10;
+	prt->length = undef;
 	prt->strlen_value = 0;
 }
 

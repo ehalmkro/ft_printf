@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 16:06:17 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/30 11:41:46 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,20 +56,23 @@ static void	parse_format(t_prt *prt)
 
 static void	init(t_prt *printf)
 {
+	printf->output = (char*)malloc(sizeof(char));
 	printf->i = 0;
 	printf->prev_i = 0;
-	printf->width = 0;
 	printf->prec = 0;
-	printf->strlen_output = 0;
-	printf->strlen_value = 0;
-	printf->output = (char*)malloc(sizeof(char));
+	printf->width = 0;
+	printf->base = 10;
 	printf->incl_space = FALSE;
 	printf->incl_hash = FALSE;
 	printf->incl_plus = FALSE;
 	printf->incl_dot = FALSE;
+	printf->incl_minus = FALSE;
+	printf->incl_zero = FALSE;
+	printf->padding_char = ' ';
 	printf->length = undef;
 	printf->u_sign = FALSE;
-	printf->base = 10;
+	printf->strlen_output = 0;
+	printf->strlen_value = 0;
 }
 
 int			ft_printf(const char *format, ...)

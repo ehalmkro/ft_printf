@@ -49,9 +49,12 @@ typedef struct	s_printf
 	char		*output;
 	va_list		ap;
 
-	int			prec;
 	size_t		i;
 	size_t		prev_i;
+
+	int			prec;
+	int			width;
+
 	size_t		base;
 	t_boolean	incl_space;
 	t_boolean	incl_hash;
@@ -61,7 +64,7 @@ typedef struct	s_printf
 	t_boolean	incl_minus;
 	t_boolean	u_sign;
 	char		padding_char;
-	int			width;
+
 	t_length	length;
 	int			strlen_output;
 	int			strlen_value;
