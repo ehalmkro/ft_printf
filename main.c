@@ -65,10 +65,43 @@ int main (int argc, char **argv)
 	printf(format, double1);
 	ft_printf(format, double1);*/
 
-	ft_printf("{% 03d}\n", 0);
-	printf("{% 03d}\n", 0);
+/*
+	printf("this %#.10f float", -0.0);
+	printf("\n");
+	ft_printf("this %#.10f float", -0.0);
+	printf("\n");
+	printf("this %05.0f", -7.3);
+	printf("\n");
+	ft_printf("this %05.0f", -7.3);
+	printf("\n");
+*/
 
-/*		ft_printf("%.4d", 42);
+	ft_printf("% 05.0f", -7.3);
+	printf("\n");
+	printf("% 05.0f", -7.3);
+	printf("\n");
+	ft_printf("% 05.6f", 7.3);
+	printf("\n");
+	printf("% 05.6f", 7.3);
+	printf("\n");
+	ft_printf("%.0f", -5.5);
+	printf("\n");
+	printf("%.0f", -5.5);
+	printf("\n");
+	/*ft_printf("%.0f", 4.5);
+	printf("\n");
+	printf("%.0f", 4.5);
+	printf("\n");
+	ft_printf("%.0f", 3.5);
+	printf("\n");
+	printf("%.0f", 3.5);*/
+
+//ft_printf("moro %lld\n", LONG_LONG_MAX);
+
+
+
+/*
+		ft_printf("%.4d", 42);
 		printf("\n");
 		printf("%.4d", 42);
 		printf("\n");

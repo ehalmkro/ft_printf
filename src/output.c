@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/30 12:07:41 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/30 17:26:17 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ char		*add_width(t_prt *prt, char *ret)
 		padding[i++] = prt->padding_char;
 	if ((CURR_POS == 'X' || CURR_POS == 'x') && prt->incl_hash == TRUE)
 		hex_width(prt, &ret, &padding, &pad_n);
-	if ((CURR_POS == 'd' || CURR_POS == 'i') && (prt->incl_plus
+	if ((CURR_POS == 'd' || CURR_POS == 'i' || CURR_POS == 'f') && (prt->incl_plus
 		|| ft_atoi(ret) < 0) && prt->incl_zero && !prt->incl_minus)
-		switch_width(&ret, &padding);
+		switch_width_sign(&ret, &padding);
 	temp = prt->incl_minus ? join_values(ret, prt->strlen_value, padding, pad_n)
 			: join_values(padding, i, ret, prt->strlen_value);
 	free(ret);
@@ -53,6 +53,7 @@ char		*add_width(t_prt *prt, char *ret)
 		prt->strlen_value + i;
 	free(temp);
 	free(padding);
+
 	return (ret);
 }
 

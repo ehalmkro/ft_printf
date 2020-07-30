@@ -12,7 +12,7 @@
 
 #include "../include/ft_printf.h"
 
-void		switch_width(char **ret, char **padding)
+void		switch_width_sign(char **ret, char **padding)
 {
 	char		temp;
 

@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 13:08:36 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/29 15:56:35 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/30 16:24:25 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct	s_convert
 int				ft_printf(const char *format, ...);
 
 void			hex_width(t_prt *prt, char **ret, char **pad, int *pad_count);
-void			switch_width(char **ret, char **padding);
+void			switch_width_sign(char **ret, char **padding);
 
 char			*output_int(t_prt *prt);
 char			*output_hex(t_prt *prt);
@@ -106,5 +106,6 @@ void			get_width(t_prt *prt);
 void			get_flags(t_prt *prt);
 void			get_precision(t_prt *prt);
 void			get_length(t_prt *prt);
+long double		rounding(long double nb, int precision);
 
 #endif

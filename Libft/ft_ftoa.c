@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:06:42 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/27 13:32:38 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/30 17:09:00 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 static long double	rounding(long double nb, int precision)
 {
 	long double	rounding;
-	int i;
 
-	rounding = 0.5;
+	rounding = precision == 0 ? 0.499 : 0.500;
 	if (nb < 0)
 		rounding *= -1;
-	i = 0;
 	while (precision-- > 0)
 		rounding /= 10.0;
 	return (rounding);
@@ -42,15 +40,15 @@ char				*ft_ftoa(long double nb, int precision)
 	nb = precision ? (nb - dec) : 0;
 	fpart = ft_strnew(precision + 2);
 	fpart[0] = '.';
-	i = 1;
-	while (precision-- > 0)
+	i = 0;
+	while (precision > i++)
 	{
 		nb *= 10;
 		dec = nb;
 		nb -= dec;
-		fpart[i++] = dec + '0';
+		fpart[i] = dec + '0';
 	}
-	ret = ft_strjoin(ipart, fpart);
+	ret = precision > 0 ? ft_strjoin(ipart, fpart) : ft_strdup(ipart);
 	free(fpart);
 	free(ipart);
 	return (ret);
