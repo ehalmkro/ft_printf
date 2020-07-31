@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/31 17:34:08 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/31 18:19:36 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ char		*initialize_int(t_prt *prt)
 	{
 		prt->u_sign = TRUE;
 		prt->base = CURR_POS == 'o' ? 8 : prt->base;
+		prt->incl_plus = FALSE;
+		prt->incl_space = FALSE;
 	}
 	prt->incl_zero = prt->incl_dot && prt->incl_zero ? FALSE : prt->incl_zero;
 	return (output_int(prt));
