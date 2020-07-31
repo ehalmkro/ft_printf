@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehalmkro <ehalmkro@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/08 16:54:29 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/30 11:41:46 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/31 18:32:17 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,26 @@ int			ft_printf(const char *format, ...)
 	ft_putnstr(prt->output, prt->strlen_output);
 	free(prt->output);
 	ret = prt->strlen_output;
+	free(prt);
+	return (ret);
+}
+
+char		*ft_sprintf(const char *format, ...)
+{
+	t_prt	*prt;
+	char	*ret;
+
+	prt = (t_prt*)malloc(sizeof(t_prt));
+	if (format)
+	{
+		va_start(prt->ap, format);
+		prt->format = (char*)format;
+		init(prt);
+		parse_format(prt);
+	}
+	ft_putnstr(prt->output, prt->strlen_output);
+	ret = ft_strdup(prt->output);
+	free(prt->output);
 	free(prt);
 	return (ret);
 }

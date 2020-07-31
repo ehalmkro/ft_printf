@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehalmkro <ehalmkro@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 13:08:36 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/31 18:23:41 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/31 18:32:42 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct	s_convert
 }				t_convert;
 
 int				ft_printf(const char *format, ...);
+char			*ft_sprintf(const char *format, ...);
 
 void			hex_width(t_prt *prt, char **ret, char **pad, int *pad_count);
 void			switch_width_sign(char **ret, char **padding);
