@@ -67,7 +67,6 @@ void		get_flags(t_prt *prt)
 		prt->i++;
 	}
 	prt->padding_char = prt->incl_zero && !prt->incl_minus ? '0' : ' ';
-
 }
 
 void		get_width(t_prt *prt)

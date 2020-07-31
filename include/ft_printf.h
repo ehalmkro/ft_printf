@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 13:08:36 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/30 16:24:25 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/31 16:11:24 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,8 @@ void			get_flags(t_prt *prt);
 void			get_precision(t_prt *prt);
 void			get_length(t_prt *prt);
 long double		rounding(long double nb, int precision);
+
+void			add_space_to_output(t_prt *prt);
+char		*initialize_int(t_prt *prt);
 
 #endif

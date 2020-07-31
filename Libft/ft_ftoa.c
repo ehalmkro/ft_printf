@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 12:06:42 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/31 12:54:29 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/31 17:06:30 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 static long double	rounding(long double nb, int precision)
 {
 	long double	rounding;
+	long double int_val;
 
-	rounding = precision == 0 ? 0.499 : 0.500;
+	ft_modf(nb, &int_val);
+	rounding = precision == 0 && (int)int_val % 2 == 0 ? 0.499 : 0.500;
 	if (nb == 0)
 		return (nb);
 	if (nb < 0)
@@ -26,7 +28,7 @@ static long double	rounding(long double nb, int precision)
 	return (rounding);
 }
 
-static int			ft_sbit(long double nb)
+static int			ft_signbit(long double nb)
 {
 	t_signbit			signbit;
 
@@ -39,22 +41,22 @@ static char			*get_floor_value(long double n)
 	long double			int_val;
 	long double			dec_val;
 	char				*ret;
-	char				*header;
+	char				*minus_sign;
 	char				*temp;
 
-	header = NULL;
+	minus_sign = NULL;
 	dec_val = ft_modf(n, &int_val);
-	if (ft_sbit(n) && dec_val <= 0)
-		header = ft_strdup("-");
+	if (ft_signbit(n) && dec_val <= 0)
+		minus_sign = ft_strdup("-");
 	n *= (n < 0) ? -1 : 1;
 	ret = ft_itoa_base(n, 10);
-	if (header)
+	if (minus_sign)
 	{
-		temp = ft_strjoin(header, ret);
+		temp = ft_strjoin(minus_sign, ret);
 		free(ret);
 		ret = ft_strdup(temp);
 		free(temp);
-		free(header);
+		free(minus_sign);
 	}
 	return (ret);
 }

@@ -76,25 +76,32 @@ int main (int argc, char **argv)
 	printf("\n");
 */
 
-	ft_printf("% 05.0f", -7.3);
+/*	ft_printf("% 05.0f", -7.3);
 	printf("\n");
 	printf("% 05.0f", -7.3);
 	printf("\n");
 	ft_printf("% 05.6f", 7.3);
 	printf("\n");
 	printf("% 05.6f", 7.3);
+	printf("\n");*/
+/*	ft_printf("%f", -3.3);
 	printf("\n");
-	ft_printf("%.0f", -5.5);
+	printf("%f", -3.3);
+	printf("\n");*/
+
+
+ft_printf("%05.5", -0.0);
+/*	ft_printf("% 5.0f", -0.0);
 	printf("\n");
-	printf("%.0f", -5.5);
+	printf("% 5.0f", -0.0);
 	printf("\n");
-	/*ft_printf("%.0f", 4.5);
+	ft_printf("% 05.0f", 7.3);
 	printf("\n");
-	printf("%.0f", 4.5);
+	printf("% 05.0f", 7.3);
 	printf("\n");
-	ft_printf("%.0f", 3.5);
+	ft_printf("%5.3f", -0.0);
 	printf("\n");
-	printf("%.0f", 3.5);*/
+	printf("%5.3f", -0.0);*/
 
 //ft_printf("moro %lld\n", LONG_LONG_MAX);
 
@@ -232,6 +239,6 @@ int main (int argc, char **argv)
 
 //while(1);
 
-	//ft_printf("%s\n", ft_uintmaxtoa(6465424242242));
+	//ft_printf("%s\n", ft_uitoa(6465424242242));
 	return(0);
 }

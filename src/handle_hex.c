@@ -59,7 +59,7 @@ char		*output_hex(t_prt *prt)
 	prt->base = 16;
 	prt->u_sign = TRUE;
 	nb = get_integer_length(prt);
-	ret = ft_uintmaxtoa(nb, prt->base);
+	ret = ft_uitoa(nb, prt->base);
 	padding_count = prt->width - ft_strlen(ret);
 	if (prt->incl_dot == TRUE)
 	{

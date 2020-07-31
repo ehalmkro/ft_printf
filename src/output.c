@@ -6,20 +6,30 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/30 17:26:17 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/31 18:02:57 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-static void	get_pad_char(t_prt *prt, char *ret)
+static int	get_pad_char(t_prt *prt, char *ret)
 {
-	if (CURR_POS == 'f' || CURR_POS == 'o')
-		return ;
-	prt->padding_char = prt->padding_char == '0' && (ret[0] != '0'
-	|| ft_atoi(ret) == 0) && !prt->incl_dot ? '0' : ' ';
+	if (CURR_POS != 'f' && CURR_POS != 'o')
+		prt->padding_char = prt->padding_char == '0' && (ret[0] != '0'
+			|| ft_atoi(ret) == 0) && !prt->incl_dot ? '0' : ' ';
+	return (prt->incl_hash && CURR_POS != 'X' && CURR_POS != 'x' ?
+			prt->width - prt->strlen_value - 2 :
+			prt->width - prt->strlen_value);
 }
 
+static void	pad_numeric(t_prt *prt, char **ret, char **padding, int *pad_n)
+{
+	if ((CURR_POS == 'X' || CURR_POS == 'x') && prt->incl_hash == TRUE)
+		hex_width(prt, ret, padding, pad_n);
+	if ((CURR_POS == 'd' || CURR_POS == 'i' || CURR_POS == 'f') &&
+	(prt->incl_plus || *(ret[0]) == '-') && prt->incl_zero && !prt->incl_minus)
+		switch_width_sign(ret, padding);
+}
 
 char		*add_width(t_prt *prt, char *ret)
 {
@@ -29,31 +39,23 @@ char		*add_width(t_prt *prt, char *ret)
 	char	*temp;
 
 	i = 0;
-
-	get_pad_char(prt, ret);
-	if ((pad_n = prt->width - prt->strlen_value) < 0)
+	if ((pad_n = get_pad_char(prt, ret)) < 0)
 		return (ret);
-	pad_n = prt->incl_hash && CURR_POS != 'X' && CURR_POS != 'x' ? pad_n - 2 : pad_n;
 	padding = ft_strnew(pad_n);
 	while (pad_n > i)
 		padding[i++] = prt->padding_char;
-	if ((CURR_POS == 'X' || CURR_POS == 'x') && prt->incl_hash == TRUE)
-		hex_width(prt, &ret, &padding, &pad_n);
-	if ((CURR_POS == 'd' || CURR_POS == 'i' || CURR_POS == 'f') && (prt->incl_plus
-		|| ft_atoi(ret) < 0) && prt->incl_zero && !prt->incl_minus)
-		switch_width_sign(&ret, &padding);
+	pad_numeric(prt, &ret, &padding, &pad_n);
 	temp = prt->incl_minus ? join_values(ret, prt->strlen_value, padding, pad_n)
 			: join_values(padding, i, ret, prt->strlen_value);
 	free(ret);
-	ret = prt->incl_minus ? (char*)malloc(sizeof(char) * (pad_n +
-		prt->strlen_value)) : (char*)malloc(sizeof(char) * (i + prt->strlen_value));
+	ret = prt->incl_minus ? (char*)malloc(sizeof(char) * (prt->strlen_value +
+		pad_n)) : (char*)malloc(sizeof(char) * (i + prt->strlen_value));
 	prt->incl_minus ? ft_memmove(ret, temp, pad_n + prt->strlen_value) :
 	ft_memmove(ret, temp, i + prt->strlen_value);
 	prt->strlen_value = prt->incl_minus ? prt->strlen_value + pad_n :
 		prt->strlen_value + i;
 	free(temp);
 	free(padding);
-
 	return (ret);
 }
 

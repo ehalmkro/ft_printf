@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/30 11:41:46 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/31 17:40:15 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ char *g_identifiers = "scSCdDiuUoOxXpfF%";
 t_convert	g_convert_tab[] =
 {
 	{'c', &output_char},
-	{'i', &output_int},
-	{'d', &output_int},
-	{'o', &output_int},
-	{'u', &output_int},
+	{'i', &initialize_int},
+	{'d', &initialize_int},
+	{'o', &initialize_int},
+	{'u', &initialize_int},
 	{'%', &percent_format},
 	{'s', &output_string},
 	{'f', &output_float},
@@ -30,29 +30,6 @@ t_convert	g_convert_tab[] =
 	{'p', &output_pointer},
 	{'\0', NULL}
 };
-
-char		*n_format(t_prt *prt)
-{
-	int *arg;
-	int ret;
-
-	ret = (int)ft_strlen(prt->output);
-	arg = va_arg(prt->ap, int*);
-	*arg = ret;
-	return (ft_strdup(""));
-}
-
-char		*percent_format(t_prt *prt)
-{
-	char *ret;
-
-	ret = ft_strnew(1);
-	ret[0] = '%';
-	prt->strlen_value = 1;
-	ret = prt->width > 0 ? add_width(prt, ret) : ret;
-	prt->strlen_value = ft_strlen(ret);
-	return (ret);
-}
 
 static void	reinit(t_prt *prt)
 {
@@ -71,13 +48,8 @@ static void	reinit(t_prt *prt)
 	prt->strlen_value = 0;
 }
 
-void		handle_params(t_prt *prt)
+static void	identifier_loop(t_prt *prt)
 {
-	int		i;
-	char	*ret;
-
-	i = 0;
-	prt->i++;
 	while (!ft_strchr(g_identifiers, CURR_POS) && CURR_POS)
 	{
 		get_flags(prt);
@@ -85,6 +57,19 @@ void		handle_params(t_prt *prt)
 		get_precision(prt);
 		get_length(prt);
 	}
+	prt->incl_zero = prt->incl_minus ? FALSE : prt->incl_zero;
+	prt->incl_space = prt->incl_plus ? FALSE : prt->incl_space;
+}
+
+void		handle_params(t_prt *prt)
+{
+	int		i;
+	char	*ret;
+
+	ret = NULL;
+	i = 0;
+	prt->i++;
+	identifier_loop(prt);
 	while (g_convert_tab[i].specifier != '\0' && CURR_POS)
 	{
 		if (CURR_POS == g_convert_tab[i].specifier)

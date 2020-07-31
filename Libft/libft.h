@@ -122,6 +122,6 @@ int					get_next_line(const int fd, char **line);
 long double			ft_modf(long double x, long double *integer);
 long double			ft_round(long double nb);
 long double			ft_powl(long double x, long double y);
-char				*ft_uintmaxtoa(uintmax_t nb, int base);
+char				*ft_uitoa(uintmax_t nb, int base);
 
 #endif
