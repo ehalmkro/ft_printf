@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 14:29:54 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/06/15 16:01:38 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/31 11:34:22 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ typedef struct		s_list
 	size_t			content_size;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct		s_bitshift
+{
+	unsigned long long	m;
+	unsigned short		sexp;
+}					t_bitshift;
+
+typedef union		u_signbit
+{
+	long double ld;
+	t_bitshift	shifter;
+}					t_signbit;
 
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
@@ -90,7 +102,7 @@ char				**ft_strsplit(char const *s, char c);
 
 char				*ft_itoa(uintmax_t n);
 char				*ft_itoa_base(intmax_t nb, int base);
-char				*ft_ftoa(long double nb, int precision);
+char				*ft_ftoa(long double n, int precision);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 t_list				*ft_lstnew(void const *content, size_t content_size);
