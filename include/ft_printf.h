@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/27 13:08:36 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/31 16:11:24 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/07/31 18:23:41 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 # define NEXT_POS prt->format[prt->i + 1]
 # define PREV_POS prt->format[prt->i - 1]
 
-# include <stdio.h>						// TODO: REMOVE THIS
-# include <string.h>						// TODO: REMOVE THIS
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -109,6 +107,6 @@ void			get_length(t_prt *prt);
 long double		rounding(long double nb, int precision);
 
 void			add_space_to_output(t_prt *prt);
-char		*initialize_int(t_prt *prt);
+char			*initialize_int(t_prt *prt);
 
 #endif
