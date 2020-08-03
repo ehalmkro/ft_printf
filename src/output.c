@@ -6,11 +6,12 @@
 /*   By: ehalmkro <ehalmkro@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/08/03 18:32:38 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/08/03 18:48:40 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+#include <stdio.h>
 
 static int	get_pad_char(t_prt *prt, char *ret)
 {
@@ -24,10 +25,17 @@ static int	get_pad_char(t_prt *prt, char *ret)
 
 static void	pad_numeric(t_prt *prt, char **ret, char **padding, int *pad_n)
 {
+	char *swap_char;
+	
 	(void)pad_n;
-	if ((CURR_POS == 'X' || CURR_POS == 'x') && prt->incl_hash == TRUE)
-		(*padding)[1] = prt->strlen_value < prt->width && prt->padding_char == '0'
-		? CURR_POS : (*padding)[1];
+	if ((CURR_POS == 'X' || CURR_POS == 'x') && prt->incl_hash == TRUE
+		&& prt->padding_char == '0')
+	{
+		(*padding)[1] = CURR_POS;
+		swap_char = ft_strrchr(*ret, CURR_POS);
+		*swap_char = '0';
+
+	}
 	if ((CURR_POS == 'd' || CURR_POS == 'i' || CURR_POS == 'f') &&
 	(prt->incl_plus || *(ret[0]) == '-') && prt->incl_zero && !prt->incl_minus)
 		switch_width_sign(ret, padding);
