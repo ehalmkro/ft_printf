@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 14:25:16 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/31 17:40:15 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/08/03 18:14:09 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static void	identifier_loop(t_prt *prt)
 		get_width(prt);
 		get_precision(prt);
 		get_length(prt);
+		if (ft_strchr(g_identifiers, CURR_POS) == NULL)
+			break;
 	}
 	prt->incl_zero = prt->incl_minus ? FALSE : prt->incl_zero;
 	prt->incl_space = prt->incl_plus ? FALSE : prt->incl_space;
