@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/08/03 18:35:43 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/08/03 18:55:25 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,9 @@ char		*output_int(t_prt *prt)
 		ret = handle_int_precision(prt, ret);
 	if (prt->incl_plus)
 		header = ft_strdup("+");
-	if (prt->incl_hash && CURR_POS == 'o')
+	if (prt->incl_hash)
 	{
-		if (ret[0] != '0')
+		if (CURR_POS == 'o' && ret[0] != '0')
 			header = ft_strdup("0");
 		prt->width += 2;
 	}

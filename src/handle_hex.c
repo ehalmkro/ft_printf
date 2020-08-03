@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/14 20:15:50 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/08/03 18:43:06 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/08/03 18:58:41 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static char	*add_hash(t_prt *prt, char *ret)
 	ret = ft_strdup(temp);
 	free(temp);
 	free(hex_hash);
+	if (CURR_POS == 'p')
+		prt->width += 2;
 	return (ret);
 }
 
