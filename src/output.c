@@ -6,7 +6,7 @@
 /*   By: ehalmkro <ehalmkro@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/20 11:56:51 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/08/03 18:22:31 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/08/03 18:32:38 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	get_pad_char(t_prt *prt, char *ret)
 {
-	if (CURR_POS != 'f' && CURR_POS != 'o')
+	if (CURR_POS != 'f')
 		prt->padding_char = prt->padding_char == '0' && (ret[0] != '0'
 			|| ft_atoi(ret) == 0) && !prt->incl_dot ? '0' : ' ';
 	return (prt->incl_hash && CURR_POS != 'X' && CURR_POS != 'x' ?
@@ -24,6 +24,7 @@ static int	get_pad_char(t_prt *prt, char *ret)
 
 static void	pad_numeric(t_prt *prt, char **ret, char **padding, int *pad_n)
 {
+	(void)pad_n;
 	if ((CURR_POS == 'X' || CURR_POS == 'x') && prt->incl_hash == TRUE)
 		(*padding)[1] = prt->strlen_value < prt->width && prt->padding_char == '0'
 		? CURR_POS : (*padding)[1];

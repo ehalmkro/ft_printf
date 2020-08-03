@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_integer.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ehalmkro <ehalmkro@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ehalmkro <ehalmkro@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/19 16:40:24 by ehalmkro          #+#    #+#             */
-/*   Updated: 2020/07/31 18:19:36 by ehalmkro         ###   ########.fr       */
+/*   Updated: 2020/08/03 18:35:43 by ehalmkro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,17 @@ static char	*check_int_flags(t_prt *prt, intmax_t nb, char *header, char *ret)
 
 	if (header != NULL && (nb >= 0 && (prt->incl_plus || prt->incl_hash)))
 	{
-		temp = ft_strjoin(header, ret);
-		free(ret);
+		if (prt->incl_dot && nb == 0 && prt->prec == 0)
+			temp = ft_strdup(header);
+		else
+		{
+			temp = ft_strjoin(header, ret);
+			free(ret);
+		}
 		ret = ft_strdup(temp);
 		free(temp);
 	}
-	if (prt->incl_dot == TRUE && prt->prec == 0 && nb == 0 && !prt->incl_hash)
+	else if (prt->incl_dot == TRUE && prt->prec == 0 && nb == 0 && !prt->incl_hash)
 	{
 		free(ret);
 		ret = ft_strdup("");
@@ -117,9 +122,10 @@ char		*output_int(t_prt *prt)
 		ret = handle_int_precision(prt, ret);
 	if (prt->incl_plus)
 		header = ft_strdup("+");
-	if (prt->incl_hash && CURR_POS == 'o' && ret[0] != '0')
+	if (prt->incl_hash && CURR_POS == 'o')
 	{
-		header = ft_strdup("0");
+		if (ret[0] != '0')
+			header = ft_strdup("0");
 		prt->width += 2;
 	}
 	ret = check_int_flags(prt, nb, header, ret);
